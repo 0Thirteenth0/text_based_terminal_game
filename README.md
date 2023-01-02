@@ -19,3 +19,14 @@
                     # ############################################################# #
                     
 CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>)
+
+controls: 
+  NAV for game menu
+    - num key 1-3 to pick options
+    - '<' or ',' to navigate up
+    - '>' or '.' to navigate down
+ Content of Gamemenu:
+    i. New Game - creates a save file in .txt to the ./savegame folder
+      - then enters the game (in progress)
+    ii. Load Game - loads progress from ./savegame folder (in progress)
+    iii. setting - supposely can change the style/color of game.
