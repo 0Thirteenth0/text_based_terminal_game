@@ -21,7 +21,9 @@
 CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>)
 
 controls: 
+
   NAV for game menu
+  
     - num key 1-3 to pick options
     - '<' or ',' to navigate up
     - '>' or '.' to navigate down
