@@ -32,3 +32,5 @@ CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>
       - then enters the game (in progress)
     ii. Load Game - loads progress from ./savegame folder (in progress)
     iii. setting - supposely can change the style/color of game.
+<img width="1172" alt="Screenshot 2023-01-01 at 6 03 23 PM" src="https://user-images.githubusercontent.com/95335912/210190703-6dc27475-65b0-4bfb-9d3f-5bc7273a0b22.png">
+<img width="1170" alt="Screenshot 2023-01-01 at 6 03 35 PM" src="https://user-images.githubusercontent.com/95335912/210190708-f21db5b7-0b26-479e-9819-d271116b3037.png">
