@@ -12,6 +12,7 @@ public:
     player(/* args */);
     ~player();
     friend std::ostream &operator<<(std::ostream &, player);
+    friend std::istream &operator>>(std::istream &, player);
 };
 
 player::player(/* args */)
@@ -39,6 +40,11 @@ std::ostream &operator<<(std::ostream &out, player p) {
         out << i.first << ":" << i.second << " ";
     out << "\n";
     return out;
+}
+
+std::ifstream & operator<<(std::ifstream &in, player p) {
+
+    return in;
 }
 player::~player()
 {

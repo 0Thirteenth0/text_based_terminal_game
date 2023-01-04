@@ -1,5 +1,6 @@
-
 # text_based_terminal_game
+
+      # run with: g++ main.cpp -std=c++17 -pthread && ./a.out
 
                     # ############################################################# #
                     # Game Idea:                                                    #

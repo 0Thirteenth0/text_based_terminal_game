@@ -7,6 +7,7 @@ private:
     void settingMenu();
 
     int selection;
+    std::vector<std::string> saves;
     std::string filename;
     player loadedPlayer;
 public:
@@ -17,7 +18,7 @@ public:
     player getPlayer() const;
 };
 
-std::atomic_bool keyPressed = false, kyp = false, keypressedNL = false; 
+std::atomic_bool keyPressed = false, kyp = false, keypressedNL = false, lKeyPressed = false; 
 static int choice = 0;
 color c;
 
@@ -27,7 +28,6 @@ bool special_characters(char c) {
         if (i == c) return false;
     return true;
 }
-
 
 void menuScreen(int selection)
 {
@@ -102,6 +102,66 @@ void menuScreen(int selection)
     }
 }
 
+void loadWindows(const std::vector<std::string> &saves, int select) {
+    int r_index = 0, t_index = 0;
+    std::vector<std::string> options;
+    std::string prompt = "    Load Saves    ";
+    std::string pg = "page ";
+    std::string pg2 = std::to_string(select/10 + 1) + " of " + std::to_string(options.size()/10 + 1);
+    for (int i = pg.size() + pg2.size(); i < prompt.size(); i++)
+        pg += ' ';
+    pg += pg2;
+    int cnt = 1;
+    for (const auto &save : saves)
+        options.push_back("["+ std::to_string(cnt++) + "] " + save.substr(9, save.find('.', 9) - 9));
+    while (!lKeyPressed)
+    {
+        winSize window;
+        system("clear");
+        std::cout << "\033[0;0H";
+        window.update();
+        t_index = 0, r_index = 0;
+        for (int i = 0; i < window.height - 2; i++)
+        {
+            for (int j = 0; j < window.width; j++)
+            {
+                if (i == 0 || i == window.height - 3) {
+                    std::cout << "-";
+                }else if(i > 7 && i <= 28  && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                    if (i == 8) {
+                        std::cout << c.getBC(12) << c.getC(7) << prompt[t_index++] << c.cReset();
+                    } else if (i > 8 && r_index < options.size() && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2) {
+                        if (select == r_index)
+                                std::cout << c.getBC(4) << c.getC(7);
+                            else 
+                                std::cout << c.getBC(7) << c.getC(4);
+                        if(t_index < options[r_index].size()){
+                            std::cout << options[r_index][t_index++] << c.cReset();
+                        }
+                        else{
+                            std::cout << " " << c.cReset();
+                        }
+                    }else{
+                        std::cout << c.getBC(7) << " " << c.cReset();
+                    }
+                }else if(i == 29 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                    std::cout << c.getBC(12) << c.getC(7) << pg[t_index++] << c.cReset();
+                }else if (j == 0 || j == window.width - 1) {
+                    std::cout << "|";
+                }else{
+                    std::cout << ' ';
+                }
+            }
+            if (r_index < options.size() && t_index == options[r_index].size())
+                r_index++;
+            t_index = 0;
+            std::cout << std::endl;
+        }
+        usleep(50000);
+    }
+    
+}
+
 void settingWindow() {
     std::string inprogress = "In Progress!";
     int r_index = 0, t_index = 0;
@@ -172,8 +232,6 @@ void outputFileWindow(const std::string &filename, std::string err) {
         }
         if(!(++ticks % 7))
             r_index = r_index == 0 ? 8 : 0;
-        if (ticks == 40 && err.size())
-            err.clear();
         usleep(50000);
     }
 }
@@ -200,7 +258,9 @@ char getch() {
 
 gameMenu::gameMenu(/* args */)
 {
-   selection = menu();
+    for (const auto & entry : fs::directory_iterator("savegame"))
+        saves.push_back(entry.path());
+    selection = menu();
     
 }
 
@@ -252,8 +312,9 @@ bool gameMenu::saveCreation(){
     while (true)
     {
         bool fExist = false;
-        std::thread lockf(outputFileWindow, filename, fExistErr);        
+        std::thread lockf(outputFileWindow, filename, fExistErr);  
         key = getch();
+        fExistErr.clear();      
         // Set the flag with true to break the loop.
         keypressedNL = true;
         lockf.join();
@@ -263,8 +324,14 @@ bool gameMenu::saveCreation(){
         else if(key == 127)
             filename = filename.substr(0, filename.size() - 1);
         if (key == '\n'){
-            for (const auto & entry : fs::directory_iterator("savegame")){
-                if(filename + ".txt" == std::string(entry.path()).substr(9)) {
+            if (filename.size() > 14 || filename.size() < 1)
+            {
+                fExist = true;
+                filename = "";
+                fExistErr = "Length need to be 1-14  ";
+            }
+            for (const auto & i : saves){
+                if(filename + ".txt" == i.substr(9)) {
                     fExist = true;
                     filename = "";
                     fExistErr = "Error File Already Exist";
@@ -281,9 +348,36 @@ bool gameMenu::saveCreation(){
     }
     return true;
 }
+
 bool gameMenu::loadSave(){
-    return false;
+    
+    int select = 0;
+    while (true)
+    {
+        std::thread lockf(loadWindows, saves, choice);        
+        select = getch();
+        // Set the flag with true to break the loop.
+        lKeyPressed = true;
+        lockf.join();
+        lKeyPressed = false;
+        if (select == ','){
+            choice--;
+            if (choice < 0)
+                choice = saves.size() > 20 ? 20 : saves.size() - 1;
+        }else if (select == '.'){
+            choice++;
+            if (choice > 20 || choice == saves.size())
+                choice = 0;
+        }
+        if (select == 27)
+            return false;
+        if (select == '\n')
+            return true;
+        
+    }
+    return true;
 }
+
 void gameMenu::settingMenu(){
     int key = '0';
     while (true)
