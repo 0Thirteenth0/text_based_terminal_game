@@ -107,20 +107,21 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
     std::vector<std::string> options;
     std::string prompt = "    Load Saves    ";
     std::string pg = "page ";
-    std::string pg2 = std::to_string(select/10 + 1) + " of " + std::to_string(options.size()/10 + 1);
-    for (int i = pg.size() + pg2.size(); i < prompt.size(); i++)
-        pg += ' ';
-    pg += pg2;
     int cnt = 1;
     for (const auto &save : saves)
         options.push_back("["+ std::to_string(cnt++) + "] " + save.substr(9, save.find('.', 9) - 9));
+    std::string pg2 = std::to_string(select/20 + 1) + " of " + std::to_string((options.size()/20 + (options.size()%20 ? 1 : 0)));
+    for (int i = pg.size() + pg2.size(); i < prompt.size(); i++)
+        pg += ' ';
+    pg += pg2;
+    
     while (!lKeyPressed)
     {
         winSize window;
         system("clear");
         std::cout << "\033[0;0H";
         window.update();
-        t_index = 0, r_index = 0;
+        t_index = 0, r_index = (select/20)*20;
         for (int i = 0; i < window.height - 2; i++)
         {
             for (int j = 0; j < window.width; j++)
@@ -363,10 +364,10 @@ bool gameMenu::loadSave(){
         if (select == ','){
             choice--;
             if (choice < 0)
-                choice = saves.size() > 20 ? 20 : saves.size() - 1;
+                choice = saves.size() - 1;
         }else if (select == '.'){
             choice++;
-            if (choice > 20 || choice == saves.size())
+            if (choice == saves.size())
                 choice = 0;
         }
         if (select == 27)
