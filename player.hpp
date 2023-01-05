@@ -1,3 +1,4 @@
+
 class player
 {
 private:
@@ -11,8 +12,10 @@ private:
 public:
     player(/* args */);
     ~player();
-    friend std::ostream &operator<<(std::ostream &, player);
-    friend std::istream &operator>>(std::istream &, player);
+    void add_stat(std::string, double);
+    friend std::ostream &operator<<(std::ofstream &, player);
+    friend std::istream &operator>>(std::ifstream &, player);
+    void name_change(std::string);
 };
 
 player::player(/* args */)
@@ -31,21 +34,64 @@ player::player(/* args */)
     statPoint = 10;
 }
 
-std::ostream &operator<<(std::ostream &out, player p) {
-    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded  << p.exp << " " << p.money<< "\n";
+// extract data into save file;
+std::ostream &operator<<(std::ofstream &out, player p) {
+    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money<< "\n";
     for (auto &i : p.baseStats)
-        out << i.first << ":" << i.second << " ";
+        out << i.first << " " << i.second << "\t";
     out << "\n";
     for (auto &i : p.stats)
-        out << i.first << ":" << i.second << " ";
+        out << i.first << " " << i.second << "\t";
     out << "\n";
     return out;
 }
-
-std::ifstream & operator<<(std::ifstream &in, player p) {
-
+// read data into game
+std::istream &operator>>(std::ifstream &in, player p) {
+    std::string line = "";
+    int index = 0;
+    std::string portion;
+    getline(in, line);
+    p.name = line.substr(index, line.find(' ', index) - index);
+    index = line.find(' ', index) + 1;
+    p.level = std::stoi(line.substr(index, line.find(' ', index) - index));
+    index = line.find(' ', index) + 1;
+    p.statPoint = std::stoi(line.substr(index, line.find(' ', index) - index));
+    index = line.find(' ', index) + 1;
+    p.expNeeded = std::stod(line.substr(index, line.find(' ', index) - index));
+    index = line.find(' ', index) + 1;
+    p.exp = std::stod(line.substr(index, line.find(' ', index) - index));
+    index = line.find(' ', index) + 1;
+    p.money = std::stoi(line.substr(index));
+    index = 0;
+    getline(in, line);
+    while (index < line.size())
+    {
+        portion = line.substr(index, line.find(' ', index) - index);
+        index = line.find(' ', index) + 1;
+        p.baseStats[portion] = std::stof(line.substr(index, line.find('\t', index)));
+        index = line.find('\t', index) + 1;
+    }
+    index = 0;
+    getline(in, line);
+    while (index < line.size())
+    {
+        portion = line.substr(index, line.find(' ', index) - index);
+        index = line.find(' ', index) + 1;
+        p.stats[portion] = std::stof(line.substr(index, line.find('\t', index)));
+        index = line.find('\t', index) + 1;
+    }
     return in;
 }
+
+void player::name_change(std::string n) {
+    name = n;
+}
+
 player::~player()
 {
+}
+
+void player::add_stat(std::string stat, double value)
+{
+
 }

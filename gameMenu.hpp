@@ -13,12 +13,13 @@ private:
 public:
     gameMenu();
     ~gameMenu();
+    void assignStat();
     int getSelection() const;
     std::string getFilename() const;
     player getPlayer() const;
 };
 
-std::atomic_bool keyPressed = false, kyp = false, keypressedNL = false, lKeyPressed = false; 
+std::atomic_bool keyPressed[5] = {false}; 
 static int choice = 0;
 color c;
 
@@ -27,6 +28,12 @@ bool special_characters(char c) {
     for (const auto &i : s)
         if (i == c) return false;
     return true;
+}
+
+void addStatWindow(){
+    while (!keyPressed[4]) {
+
+    }
 }
 
 void menuScreen(int selection)
@@ -46,7 +53,7 @@ void menuScreen(int selection)
     title.push_back("/\\__|    (  <_> )  |  /|  | \\/   |  \\  ___/\\___  |");
     title.push_back("\\________|\\____/|____/ |__|  |___|  /\\___  > ____|");
     title.push_back("                                  \\/     \\/\\/     ");
-    while (!keyPressed)
+    while (!keyPressed[0])
     {
         winSize window;
         system("clear");
@@ -115,7 +122,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
         pg += ' ';
     pg += pg2;
     
-    while (!lKeyPressed)
+    while (!keyPressed[2])
     {
         winSize window;
         system("clear");
@@ -166,7 +173,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
 void settingWindow() {
     std::string inprogress = "In Progress!";
     int r_index = 0, t_index = 0;
-    while (!kyp)
+    while (!keyPressed[1])
     {
         winSize window;
         system("clear");
@@ -197,7 +204,7 @@ void settingWindow() {
 void outputFileWindow(const std::string &filename, std::string err) {
     std::string prompt = "Please Enter a Filename!", nameErr = "Error: Name is Too Long!";
     int r_index = 0, t_index = 0, ticks = 0;
-    while (!keypressedNL)
+    while (!keyPressed[3])
     {
         winSize window;
         system("clear");
@@ -272,9 +279,9 @@ int gameMenu::menu() {
         std::thread lockf(menuScreen, choice);        
         select = getch();
         // Set the flag with true to break the loop.
-        keyPressed = true;
+        keyPressed[0] = true;
         lockf.join();
-        keyPressed = false;
+        keyPressed[0] = false;
         if (select == ','){
             choice--;
             if (choice < 0)
@@ -297,8 +304,14 @@ int gameMenu::menu() {
             filename = "";
         }else if (select - '0' == 2 || (select == '\n' && choice == 2)) {
             select = choice;
-            if(loadSave())
+            if(loadSave()){
+                std::ifstream ifile("./"+filename);
+                if(ifile.is_open())
+                   ifile >> loadedPlayer;
+                ifile.close();
                 break;
+            }
+            
         }else if (select - '0' == 3 || (select == '\n' && choice == 3)) {
             settingMenu();
         }
@@ -317,9 +330,9 @@ bool gameMenu::saveCreation(){
         key = getch();
         fExistErr.clear();      
         // Set the flag with true to break the loop.
-        keypressedNL = true;
+        keyPressed[3] = true;
         lockf.join();
-        keypressedNL = false;
+        keyPressed[3] = false;
         if (!special_characters(key))
             filename += key;
         else if(key == 127)
@@ -353,14 +366,15 @@ bool gameMenu::saveCreation(){
 bool gameMenu::loadSave(){
     
     int select = 0;
+    choice = 0;
     while (true)
     {
         std::thread lockf(loadWindows, saves, choice);        
         select = getch();
         // Set the flag with true to break the loop.
-        lKeyPressed = true;
+        keyPressed[2] = true;
         lockf.join();
-        lKeyPressed = false;
+        keyPressed[2] = false;
         if (select == ','){
             choice--;
             if (choice < 0)
@@ -373,7 +387,10 @@ bool gameMenu::loadSave(){
         if (select == 27)
             return false;
         if (select == '\n')
+        {
+            filename = saves[choice];
             return true;
+        }
         
     }
     return true;
@@ -386,15 +403,47 @@ void gameMenu::settingMenu(){
         std::thread lockf(settingWindow);        
         key = getch();
         // Set the flag with true to break the loop.
-        kyp = true;
+        keyPressed[1] = true;
         lockf.join();
         if (key == '\n')
             break;
     }
-    kyp = false;
+    keyPressed[1] = false;
 }
 
 gameMenu::~gameMenu(){}
+
+void gameMenu::assignStat() {
+    int select = 0;
+    choice = 0;
+    while (true)
+    {
+        std::thread lockf(addStatWindow);        
+        select = getch();
+        // Set the flag with true to break the loop.
+        keyPressed[4] = true;
+        lockf.join();
+        keyPressed[4] = false;
+        if (select == ','){
+            choice--;
+            if (choice < 0)
+                choice = saves.size() - 1;
+        }else if (select == '.'){
+            choice++;
+            if (choice == saves.size())
+                choice = 0;
+        }
+        // 27 == esc
+        if (select == 27)
+
+        if (select == '\n')
+        {
+
+        }
+        
+    }
+
+}
 
 int gameMenu::getSelection() const {
     return selection;
@@ -407,3 +456,4 @@ std::string gameMenu::getFilename() const {
 player gameMenu::getPlayer() const { 
     return loadedPlayer;
 }
+
