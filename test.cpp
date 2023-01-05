@@ -2,35 +2,37 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include <sstream>
+using namespace std;
 
 class color
 {
 private:
-    std::string reset;
+     string reset;
     int cSize;
-    std::string *c = nullptr, *bc = nullptr;
+     string *c = nullptr, *bc = nullptr;
 public:
     color();
     ~color();
-    std::string cReset() const;
-    std::string getC(int) const;
-    std::string getBC(int) const;
+     string cReset() const;
+     string getC(int) const;
+     string getBC(int) const;
     int getSize() const;
 };
 
 // ANSI Color Manip...
 color::color() : reset("\u001b[0m"), cSize(16) {
-    c = new std::string [cSize];
-    bc = new std::string [cSize];
+    c = new  string [cSize];
+    bc = new  string [cSize];
     int code = 0;
     for (int i = 0; i < cSize; i++)
     {
         if (code == 8)
             code = 0;
         if (i < cSize / 2)
-            c[i] = "\u001b[3" + std::to_string(code++) + "m";
+            c[i] = "\u001b[3" +  to_string(code++) + "m";
         else
-            c[i] = "\u001b[3" + std::to_string(code++) + ";1m";
+            c[i] = "\u001b[3" +  to_string(code++) + ";1m";
     }
     code = 0;
     for (int i = 0; i < cSize; i++)
@@ -38,22 +40,22 @@ color::color() : reset("\u001b[0m"), cSize(16) {
         if (code == 8)
             code = 0;
         if (i < cSize / 2)
-            bc[i] = "\u001b[4" + std::to_string(code++) + "m";
+            bc[i] = "\u001b[4" +  to_string(code++) + "m";
         else
-            bc[i] = "\u001b[4" + std::to_string(code++) + ";1m";
+            bc[i] = "\u001b[4" +  to_string(code++) + ";1m";
     }
 }
 color::~color() {
     delete[] c;
     delete[] bc;
 }
-std::string color::getC(int x) const{
+ string color::getC(int x) const{
     return c[x];
 }
-std::string color::getBC(int x) const{
+ string color::getBC(int x) const{
     return bc[x];
 }
-std::string color::cReset() const {
+ string color::cReset() const {
     return reset;
 }
 int color::getSize() const {
@@ -85,15 +87,16 @@ int main() {
     color c;
     for (int i = 0; i < c.getSize(); i++)
     {
-        std::cout << c.getC(i) << i << c.cReset();
+         cout << c.getC(i) << i << c.cReset();
     }
-    std::cout << std::endl;
+     cout <<  endl;
 
     for (int i = 0; i < c.getSize(); i++)
     {
-        std::cout << c.getBC(i) << i << c.cReset();
+         cout << c.getBC(i) << i << c.cReset();
     }
-    std::cout << std::endl;
-    
+     cout <<  endl;
+
+    return 0;
     
 }

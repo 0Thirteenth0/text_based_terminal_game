@@ -56,8 +56,7 @@ namespace fs = std::filesystem;
 #define SPD     "spd"
 
 
-
-
+#include <sstream>
 #include <map>
 #include <sys/ioctl.h>
 #include <termios.h>
