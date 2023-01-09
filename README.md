@@ -18,8 +18,7 @@
                     #   III. Ability to save game data.(Shortcut key to save data)  #
                     #   IV. May add in Text-log functionality.                      #
                     # ############################################################# #
-                    
-CURRENTLY ONLY GAME MENU IS BEING WORKED ON. 
+                                        
 (<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>) 
 
 ## GameMenu:
