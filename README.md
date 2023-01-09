@@ -36,7 +36,8 @@
     - Prompts to enter a new save game name to create new save in ./savegame folder.
     - Name must be between 1 and 14 length characters.
     - Name must not be already existing in the ./savegame folder.
-    
+![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/95335912/211424065-c48274e6-27ea-4b72-bb99-0cc848944b98.gif)
+
 #### Load Game Menu:
     - '<' or ',' and '>' or '.' to navigate through the list of saved progress.
     - Loads progress from save file in ./savegame folder.
