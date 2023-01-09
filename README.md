@@ -28,8 +28,7 @@ CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>
     - num key 1-3 to pick options
     - '<' or ',' to navigate up
     - '>' or '.' to navigate down
-
-  <img width="1170" alt="Screenshot 2023-01-01 at 6 03 35 PM" src="https://user-images.githubusercontent.com/95335912/210190708-f21db5b7-0b26-479e-9819-d271116b3037.png">
+![ezgif com-gif-maker-2](https://user-images.githubusercontent.com/95335912/211420343-eb76a431-1018-4cad-84dd-0c756c954e01.gif)
     
  Content of Gamemenu:
  
