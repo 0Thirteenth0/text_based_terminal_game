@@ -18,8 +18,8 @@
                     #   III. Ability to save game data.(Shortcut key to save data)  #
                     #   IV. May add in Text-log functionality.                      #
                     # ############################################################# #
-                                        
-(<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>) 
+
+(<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) 
 
 ## GameMenu:
   NAV for game menu
