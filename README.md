@@ -44,4 +44,8 @@
       * !!- Currently only loads player data. -!!
  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
+#### Settings:
+    - This functionality is not available as of now.
+      * The settings that I'm thinking to manipulate is the color/theme of the game.
+
 
