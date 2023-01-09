@@ -122,7 +122,8 @@ int main(int argv, char** argc) {
     // std::cout << "\n";
     gameMenu start;
 
-    if(start.getSelection() == 1)
+    std::cout << "start:"  << start.getSelection() << "\n";
+    if(start.getSelection() == 0)
         start.assignStat();
     
     

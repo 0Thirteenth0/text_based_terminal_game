@@ -13,7 +13,7 @@ private:
 public:
     gameMenu();
     ~gameMenu();
-    void assignStat();
+    bool assignStat();
     int getSelection() const;
     std::string getFilename() const;
     player getPlayer() const;
@@ -30,9 +30,34 @@ bool special_characters(char c) {
     return true;
 }
 
-void addStatWindow(){
+void addStatWindow(int select){
+    int r_index = 0, t_index = 0;
+    std::string header = "Assign Data";
     while (!keyPressed[4]) {
-
+        winSize window;
+        system("clear");
+        std::cout << "\033[0;0H";
+        window.update();
+        r_index = 0, t_index = 0;
+        for (int i = 0; i < window.height - 2; i++)
+        {
+            for (int j = 0; j < window.width; j++)
+            {
+                if (i == 0 || i == window.height - 3) {
+                    std::cout << "=";
+                }else if (j <= 1 || j == window.width - 1 || j == window.width - 2) {
+                    std::cout << "|";
+                }else if() {
+                    
+                }else{
+                    std::cout << " ";
+                }
+            }
+            t_index = 0;
+            std::cout << std::endl;
+        }
+        
+        usleep(50000);
     }
 }
 
@@ -413,12 +438,12 @@ void gameMenu::settingMenu(){
 
 gameMenu::~gameMenu(){}
 
-void gameMenu::assignStat() {
+bool gameMenu::assignStat() {
     int select = 0;
     choice = 0;
     while (true)
     {
-        std::thread lockf(addStatWindow);        
+        std::thread lockf(addStatWindow, choice);        
         select = getch();
         // Set the flag with true to break the loop.
         keyPressed[4] = true;
@@ -435,14 +460,15 @@ void gameMenu::assignStat() {
         }
         // 27 == esc
         if (select == 27)
+            return false;
 
-        if (select == '\n')
-        {
 
+        if (select == '\n') {
+            return true;
         }
         
     }
-
+    return false;
 }
 
 int gameMenu::getSelection() const {
