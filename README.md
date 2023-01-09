@@ -20,7 +20,7 @@
                     # ############################################################# #
                     
 CURRENTLY ONLY GAME MENU IS BEING WORKED ON. 
-(<<<<<<<<<<<<<<<<<<<<<<IN-PROGRESS>>>>>>>>>>>>>>>>>>>>>) 
+(<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>) 
 
 ## GameMenu:
   NAV for game menu
