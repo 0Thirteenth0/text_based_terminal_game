@@ -32,7 +32,7 @@
     1. New Game - creates a save file in .txt to the ./savegame folder.
     2. Load Game - loads progress from ./savegame folder.
     3. Setting - supposely can change the style/color of game.
-### New Game:
+#### New Game:
     - Prompts to enter a new save game name to create new save in ./savegame folder.
     - Name must be between 1 and 14 length characters.
     - Name must not be already existing in the ./savegame folder.
