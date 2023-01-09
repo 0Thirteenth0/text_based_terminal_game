@@ -36,8 +36,8 @@ CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>
     i. New Game - creates a save file in .txt to the ./savegame folder.
     ii. Load Game - loads progress from ./savegame folder.
       - '<' or ',' and '>' or '.' to navigate through the list of saved progress
-      ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
     iii. setting - supposely can change the style/color of game.
 
+ ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
 
