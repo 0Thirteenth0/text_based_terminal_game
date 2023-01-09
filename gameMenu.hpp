@@ -194,33 +194,37 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
 }
 
 void settingWindow() {
-    std::string inprogress = "In Progress!";
-    int r_index = 0, t_index = 0;
+    std::string inprogress = "       In Progress!       ";
+    int r_index = 0, t_index = 0, ticks = 0;
     while (!keyPressed[1])
     {
         winSize window;
         system("clear");
         std::cout << "\033[0;0H";
         window.update();
-        r_index = 0, t_index = 0;
+        t_index = 0;
         for (int i = 0; i < window.height - 2; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
                 if (i == 0 || i == window.height - 3) {
-                    std::cout << "-";
+                    std::cout << c.getBC(0) << "-";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - inprogress.size() / 2 && j < (window.width - 2) / 2 + inprogress.size() / 2 + 2){
-                    std::cout << inprogress[t_index++];
+                    std::cout << c.getBC(0) << inprogress[t_index++];
                 }else if (j == 0 || j == window.width - 1) {
-                    std::cout << "|";
+                    std::cout << c.getBC(0) << "|";
                 }else{
-                    std::cout << ' ';
+                    std::cout << c.getBC((j + r_index) % c.getSize()) << ' ';
                 }
+                std::cout << c.cReset();
             }
             t_index = 0;
         }
+        
+        r_index++;
+        
         std::cout << std::endl;
-        usleep(50000);
+        usleep(200000);
     }
 }
 
