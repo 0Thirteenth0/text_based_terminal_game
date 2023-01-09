@@ -19,12 +19,12 @@
                     #   IV. May add in Text-log functionality.                      #
                     # ############################################################# #
                     
-CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) 
+CURRENTLY ONLY GAME MENU IS BEING WORKED ON. 
+(<<<<<<<<<<<<<<<<<<<<<<IN-PROGRESS>>>>>>>>>>>>>>>>>>>>>) 
 
 ## GameMenu:
-
   NAV for game menu
-  
+
     - num key 1-3 to pick options
     - '<' or ',' to navigate up
     - '>' or '.' to navigate down
@@ -34,8 +34,7 @@ CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>
     2. Load Game - loads progress from ./savegame folder.
       - '<' or ',' and '>' or '.' to navigate through the list of saved progress
     3. setting - supposely can change the style/color of game.
-
-### Load Game Menu:
+#### Load Game Menu:
  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
 
