@@ -47,8 +47,6 @@ void addStatWindow(int select){
                     std::cout << "=";
                 }else if (j <= 1 || j == window.width - 1 || j == window.width - 2) {
                     std::cout << "|";
-                }else if() {
-                    
                 }else{
                     std::cout << " ";
                 }

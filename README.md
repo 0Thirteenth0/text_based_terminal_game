@@ -30,12 +30,10 @@ CURRENTLY ONLY GAME MENU IS BEING WORKED ON. (INPROGRESS>>>>>>>>>>>>>>>>>>>>>>>>
     - '>' or '.' to navigate down
 ![ezgif com-gif-maker-2](https://user-images.githubusercontent.com/95335912/211420343-eb76a431-1018-4cad-84dd-0c756c954e01.gif)
     
- Content of Gamemenu:
- 
-    i. New Game - creates a save file in .txt to the ./savegame folder.
-    ii. Load Game - loads progress from ./savegame folder.
+    1. New Game - creates a save file in .txt to the ./savegame folder.
+    2. Load Game - loads progress from ./savegame folder.
       - '<' or ',' and '>' or '.' to navigate through the list of saved progress
-    iii. setting - supposely can change the style/color of game.
+    3. setting - supposely can change the style/color of game.
 
  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
