@@ -81,10 +81,10 @@ void menuScreen(int selection)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (window.height - 1 < title.size() + 12 || window.width - 2  < title[0].size()){
+                if (window.height - 1 < title.size() + 12 || window.width - 3  < title[0].size()){
                     if (i == 0 || i == window.height - 2) {
                         std::cout << "#";
-                    }else if (i == (window.height - 3) / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 + err_resize.size() / 2){
+                    }else if (i == window.height / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 + err_resize.size() / 2){
                         std::cout << err_resize[t_index++];
                     }else if (j == 0 || j == window.width - 1) {
                         std::cout << "#";
@@ -92,7 +92,7 @@ void menuScreen(int selection)
                         std::cout << " ";
                     }
                 }else{
-                    if (i == 0 || i == window.height - 2) {
+                    if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                         std::cout << "#";
                     }else if (i > 4 && i < 16 && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2) {
                         std::cout << title[r_index][t_index++];
@@ -110,8 +110,6 @@ void menuScreen(int selection)
                         if (selection == 3)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << set[t_index++] << c.cReset();
-                    }else if (j == 0 || j == window.width - 1) {
-                        std::cout << "#";
                     }else{
                         std::cout << ' ';
                     }
@@ -216,12 +214,8 @@ void settingWindow() {
                 std::cout << c.cReset();
             }
             t_index = 0;
-        }
-        
+        } 
         r_index++;
-        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
-        std::cout << "\033["+ std::to_string(window.height) + ";0H";
-        std::cout << "\033["+ std::to_string(window.height - 1) + ";0H";
         std::cout << std::endl;
         usleep(200000);
     }
@@ -266,9 +260,6 @@ void outputFileWindow(const std::string &filename, std::string err) {
             t_index = 0;
             std::cout << std::endl;
         }
-        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
-        std::cout << "\033["+ std::to_string(window.height) + ";0H";
-        std::cout << "\033["+ std::to_string(window.height - 1) + ";0H";
         if(!(++ticks % 7))
             r_index = r_index == 0 ? 8 : 0;
         usleep(50000);
