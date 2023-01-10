@@ -61,7 +61,7 @@
         - "\033[#;#H" or "\033[#;#f" might not work as expected, it moves the cursor 
           to the desired position however also clears everything after it.
       3. need a better way to edit the screen output.
-        - save the screen into a 2d dynamic array or vector and edit the output that 
+        - save the output into a 2d dynamic array or vector and edit the output that 
           way (mostlikely vector);
           1. ability to add little decoration ascii art into the output.
           2. ability to put entities onto the output.
