@@ -5,6 +5,7 @@
 #include <sstream>
 using namespace std;
 
+
 class color
 {
 private:
@@ -19,6 +20,10 @@ public:
      string getBC(int) const;
     int getSize() const;
 };
+void cursorSet(int y, int x) {
+    std::string c = "\033[" + std::to_string(y) + ";" + std::to_string(x) + "f";
+    std::cout << c;
+}
 
 // ANSI Color Manip...
 color::color() : reset("\u001b[0m"), cSize(16) {
@@ -95,7 +100,14 @@ int main() {
     {
          cout << c.getBC(i) << i << c.cReset();
     }
-     cout <<  endl;
+    cout <<  endl;
+
+    for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 20; j++)
+            cout << "#";
+        std::cout << std::endl;
+    }
+    cursorSet(10,40);
 
     return 0;
     
