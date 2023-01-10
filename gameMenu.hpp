@@ -432,8 +432,11 @@ void gameMenu::settingMenu(){
         // Set the flag with true to break the loop.
         keyPressed[1] = true;
         lockf.join();
-        if (key == '\n')
+        if (key == 27)
             break;
+        else
+            keyPressed[1] = false;
+        
     }
     keyPressed[1] = false;
 }

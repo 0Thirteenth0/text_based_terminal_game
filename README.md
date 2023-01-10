@@ -54,8 +54,10 @@
   #### Planning:
     - Design:
       1. Frame of the game will be with '=' and '||', empty backgrounds will be ' '.
-      2. Might use ansi escape code to manipulate the row and colum of to write on the terminal inorder to better lower the refresh frame.
-        - "\033[#;#H" or "\033[#;#f" might now work as expected, it moves the cursor to the desired position however also clears everything after it.
+      2. Might use ansi escape code to manipulate the row and colum of to write on the
+        terminal inorder to better lower the refresh frame.
+        - "\033[#;#H" or "\033[#;#f" might now work as expected, it moves the cursor 
+          to the desired position however also clears everything after it.
       3. need a better way to edit the screen output.
         - save the screen into a 2d dynamic array or vector and edit the output that way (mostlikely vector);
           1. ability to add little decoration ascii art into the output.
