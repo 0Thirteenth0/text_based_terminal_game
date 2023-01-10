@@ -73,7 +73,6 @@ void cursorSet(int y, int x) {
 }
 
 // MISC lib
-#include "titleName.hpp"
 #include "color.hpp"
 #include "winSize.hpp"
 

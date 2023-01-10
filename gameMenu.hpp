@@ -94,19 +94,19 @@ void menuScreen(int selection)
                 }else{
                     if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                         std::cout << "#";
-                    }else if (i > 4 && i < 16 && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2) {
+                    }else if (i > (window.height / 2 > 10 ? window.height / 2 - title.size() : 4) && i < (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size(): title.size() + 4) && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2){
                         std::cout << title[r_index][t_index++];
                         if(t_index == title[r_index].size())
                             r_index++;
-                    }else if(i == 18 && j > window.width / 2 - newGame.size() / 2 && j < (window.width - 2) / 2 + newGame.size() / 2 + 2){
+                    }else if(i == (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size() + 2 : 18) && j > window.width / 2 - newGame.size() / 2 && j < (window.width - 2) / 2 + newGame.size() / 2 + 2){
                         if (selection == 1)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << newGame[t_index++] << c.cReset();
-                    }else if(i == 20 && j > window.width / 2 - load.size() / 2 && j < (window.width - 2) / 2 + load.size() / 2 + 3){
+                    }else if(i == (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size() + 4 : 20) && j > window.width / 2 - load.size() / 2 && j < (window.width - 2) / 2 + load.size() / 2 + 3){
                         if (selection == 2)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << load[t_index++] << c.cReset();
-                    }else if(i == 22 && j > window.width / 2 - newGame.size() / 2 && j <= (window.width / 2 - newGame.size() / 2) + set.size()){
+                    }else if(i == (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size() + 6 : 22) && j > window.width / 2 - newGame.size() / 2 && j <= (window.width / 2 - newGame.size() / 2) + set.size()){
                         if (selection == 3)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << set[t_index++] << c.cReset();
@@ -149,19 +149,19 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
             {
                 if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
-                }else if(window.height < 32 || window.width < prompt.size() + 2) {
+                }else if(window.height < 30 || window.width < prompt.size() + 2) {
                     if(i == window.height / 2 && j > window.width / 2 - err_resize.size()/2 && j <= window.width / 2 - err_resize.size()/2 + err_resize.size())
                         std::cout << err_resize[t_index++];
                     else
                         std::cout << " ";
-                }else if(i > 7 && i <= 28  && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
-                    if (i == 8) {
+                }else if(i > window.height / 2 - window.height / 3 && i <= window.height / 2 - window.height / 3 + 21 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                    if (i == window.height / 2 - window.height / 3 + 1) {
                         std::cout << c.getBC(12) << c.getC(7) << prompt[t_index++] << c.cReset();
-                    } else if (i > 8 && r_index < options.size() && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2) {
+                    }else if (i > window.height / 2 - window.height / 3 + 1 && r_index < options.size() && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2) {
                         if (select == r_index)
                                 std::cout << c.getBC(4) << c.getC(7);
-                            else 
-                                std::cout << c.getBC(7) << c.getC(4);
+                        else 
+                            std::cout << c.getBC(7) << c.getC(4);
                         if(t_index < options[r_index].size()){
                             std::cout << options[r_index][t_index++] << c.cReset();
                         }
@@ -171,7 +171,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
                     }else{
                         std::cout << c.getBC(7) << " " << c.cReset();
                     }
-                }else if(i == 29 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                }else if(i == window.height / 2 - window.height / 3 + 22 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     std::cout << c.getBC(12) << c.getC(7) << pg[t_index++] << c.cReset();
                 }else{
                     std::cout << ' ';
