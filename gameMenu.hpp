@@ -118,7 +118,6 @@ void menuScreen(int selection)
             t_index = 0;
             std::cout << std::endl;
         }
-        
         if (++ticks % 30)
             ticks = 0;
         usleep(50000);
@@ -183,10 +182,8 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
             t_index = 0;
             std::cout << std::endl;
         }
-        
         usleep(50000);
     }
-    
 }
 
 void settingWindow() {
@@ -267,23 +264,23 @@ void outputFileWindow(const std::string &filename, std::string err) {
 }
 
 char getch() {
-        char buf = 0;
-        struct termios old = {0};
-        if (tcgetattr(0, &old) < 0)
-                perror("tcsetattr()");
-        old.c_lflag &= ~ICANON;
-        old.c_lflag &= ~ECHO;
-        old.c_cc[VMIN] = 1;
-        old.c_cc[VTIME] = 0;
-        if (tcsetattr(0, TCSANOW, &old) < 0)
-                perror("tcsetattr ICANON");
-        if (read(0, &buf, 1) < 0)
-                perror ("read()");
-        old.c_lflag |= ICANON;
-        old.c_lflag |= ECHO;
-        if (tcsetattr(0, TCSADRAIN, &old) < 0)
-                perror ("tcsetattr ~ICANON");
-        return (buf);
+    char buf = 0;
+    struct termios old = {0};
+    if (tcgetattr(0, &old) < 0)
+            perror("tcsetattr()");
+    old.c_lflag &= ~ICANON;
+    old.c_lflag &= ~ECHO;
+    old.c_cc[VMIN] = 1;
+    old.c_cc[VTIME] = 0;
+    if (tcsetattr(0, TCSANOW, &old) < 0)
+            perror("tcsetattr ICANON");
+    if (read(0, &buf, 1) < 0)
+            perror ("read()");
+    old.c_lflag |= ICANON;
+    old.c_lflag |= ECHO;
+    if (tcsetattr(0, TCSADRAIN, &old) < 0)
+            perror ("tcsetattr ~ICANON");
+    return (buf);
 }
 
 gameMenu::gameMenu(/* args */)
@@ -291,7 +288,6 @@ gameMenu::gameMenu(/* args */)
     for (const auto & entry : fs::directory_iterator("savegame"))
         saves.push_back(entry.path());
     selection = menu();
-    
 }
 
 int gameMenu::menu() {
@@ -378,7 +374,6 @@ bool gameMenu::saveCreation(){
         }
         if (key == 27)
             return false;
-        
     }
     return true;
 }
@@ -431,7 +426,6 @@ void gameMenu::settingMenu(){
             break;
         else
             keyPressed[1] = false;
-        
     }
     keyPressed[1] = false;
 }
