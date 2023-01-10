@@ -36,11 +36,11 @@ void addStatWindow(int select){
         std::cout << "\033[0;0H";
         window.update();
         r_index = 0, t_index = 0;
-        for (int i = 0; i < window.height - 2; i++)
+        for (int i = 0; i < window.height - 1; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 3 || j == 0 || j == window.width - 1) {
+                if (i == 0 || i == window.height - 1 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
                 }else{
                     std::cout << " ";
@@ -49,9 +49,7 @@ void addStatWindow(int select){
             t_index = 0;
             std::cout << std::endl;
         }
-        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
-        cursorSet(window.height,0);
-        cursorSet(window.height - 1, 0);
+        
         usleep(50000);
     }
 }
@@ -79,12 +77,12 @@ void menuScreen(int selection)
         std::cout << "\033[0;0H";
         window.update();
         r_index = 0, t_index = 0;
-        for (int i = 0; i < window.height - 2; i++)
+        for (int i = 0; i < window.height - 1; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (window.height - 2 < title.size() + 12 || window.width - 2  < title[0].size()){
-                    if (i == 0 || i == window.height - 3) {
+                if (window.height - 1 < title.size() + 12 || window.width - 2  < title[0].size()){
+                    if (i == 0 || i == window.height - 2) {
                         std::cout << "#";
                     }else if (i == (window.height - 3) / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 + err_resize.size() / 2){
                         std::cout << err_resize[t_index++];
@@ -94,7 +92,7 @@ void menuScreen(int selection)
                         std::cout << " ";
                     }
                 }else{
-                    if (i == 0 || i == window.height - 3) {
+                    if (i == 0 || i == window.height - 2) {
                         std::cout << "#";
                     }else if (i > 4 && i < 16 && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2) {
                         std::cout << title[r_index][t_index++];
@@ -122,9 +120,7 @@ void menuScreen(int selection)
             t_index = 0;
             std::cout << std::endl;
         }
-        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
-        cursorSet(window.height,0);
-        cursorSet(window.height - 1, 0);
+        
         if (++ticks % 30)
             ticks = 0;
         usleep(50000);
@@ -150,11 +146,11 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0, r_index = (select/20)*20;
-        for (int i = 0; i < window.height - 2; i++)
+        for (int i = 0; i < window.height - 1; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 3) {
+                if (i == 0 || i == window.height - 2) {
                     std::cout << "#";
                 }else if(i > 7 && i <= 28  && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (i == 8) {
@@ -186,9 +182,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
             t_index = 0;
             std::cout << std::endl;
         }
-        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
-        cursorSet(window.height,0);
-        cursorSet(window.height - 1, 0);
+        
         usleep(50000);
     }
     
@@ -203,11 +197,11 @@ void settingWindow() {
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0;
-        for (int i = 0; i < window.height - 2; i++)
+        for (int i = 0; i < window.height - 1; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 3) {
+                if (i == 0 || i == window.height - 2) {
                     std::cout << c.getBC(0) << "#";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - inprogress.size() / 2 && j < (window.width - 2) / 2 + inprogress.size() / 2 + 2){
                     std::cout << c.getBC(0) << inprogress[t_index++];
@@ -239,11 +233,11 @@ void outputFileWindow(const std::string &filename, std::string err) {
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0;
-        for (int i = 0; i < window.height - 2; i++)
+        for (int i = 0; i < window.height - 1; i++)
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 3) {
+                if (i == 0 || i == window.height - 2) {
                     std::cout << "#";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (err.size()){

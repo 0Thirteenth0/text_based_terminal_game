@@ -77,8 +77,8 @@ void cursorSet(int y, int x) {
 #include "winSize.hpp"
 
 #include "player.hpp"
-#include "game.hpp"
 #include "gameMenu.hpp"
+#include "game.hpp"
 
 
 
