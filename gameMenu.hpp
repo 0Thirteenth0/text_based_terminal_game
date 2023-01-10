@@ -6,17 +6,15 @@ private:
     bool loadSave();
     void settingMenu();
 
+protected:
     int selection;
     std::vector<std::string> saves;
     std::string filename;
     player loadedPlayer;
+    bool assignStat();
 public:
     gameMenu();
     ~gameMenu();
-    bool assignStat();
-    int getSelection() const;
-    std::string getFilename() const;
-    player getPlayer() const;
 };
 
 std::atomic_bool keyPressed[5] = {false}; 
@@ -469,17 +467,5 @@ bool gameMenu::assignStat() {
         }
     }
     return false;
-}
-
-int gameMenu::getSelection() const {
-    return selection;
-}
-
-std::string gameMenu::getFilename() const {
-    return filename;
-}
-
-player gameMenu::getPlayer() const { 
-    return loadedPlayer;
 }
 

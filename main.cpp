@@ -123,12 +123,8 @@ int main(int argv, char** argc) {
     // for (const auto & i : save_games)
     //     std::cout << i.substr(9) << "\t";
     // std::cout << "\n";
-    gameMenu start;
+    game start;
 
-    if(start.getSelection() == 0)
-        start.assignStat();
-    
-    
     
     t.on();
 }
