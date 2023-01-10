@@ -40,7 +40,7 @@ void addStatWindow(int select){
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 1 || j == 0 || j == window.width - 1) {
+                if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
                 }else{
                     std::cout << " ";
