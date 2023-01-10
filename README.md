@@ -65,7 +65,7 @@
           2. ability to put entities onto the output.
       4. UI, such as:
         - keybind hints
-        - character status and inventory menu and UI icon.
+        - character status and inventory menu and UI icon. Example:
 <img width="823" alt="Screenshot 2023-01-09 at 5 31 21 PM" src="https://user-images.githubusercontent.com/95335912/211441598-4d4b96d1-28b1-4c5a-bd24-9e7bf951ea4d.png">
 
 
