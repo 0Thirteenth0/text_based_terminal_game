@@ -53,7 +53,7 @@
 ### Game Design and Concept:
   #### Planning:
     - Design:
-      1. Frame of the game will be with '=' and '||', empty backgrounds will be ' '.
+      1. Frame of the game will be with "#", empty backgrounds will be ' '.
       2. Might use ansi escape code to manipulate the row and colum of to write on the
         terminal inorder to better lower the refresh frame.
         - "\033[#;#H" or "\033[#;#f" might now work as expected, it moves the cursor 
@@ -63,4 +63,8 @@
           way (mostlikely vector);
           1. ability to add little decoration ascii art into the output.
           2. ability to put entities onto the output.
+      4. UI, such as:
+        - keybind hints
+        - character status and inventory menu and UI icon.
+
 
