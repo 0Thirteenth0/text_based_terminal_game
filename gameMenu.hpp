@@ -43,10 +43,8 @@ void addStatWindow(int select){
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 3) {
-                    std::cout << "=";
-                }else if (j <= 1 || j == window.width - 1 || j == window.width - 2) {
-                    std::cout << "|";
+                if (i == 0 || i == window.height - 3 || j == 0 || j == window.width - 1) {
+                    std::cout << "#";
                 }else{
                     std::cout << " ";
                 }
@@ -89,17 +87,17 @@ void menuScreen(int selection)
             {
                 if (window.height - 2 < title.size() + 12 || window.width - 2  < title[0].size()){
                     if (i == 0 || i == window.height - 3) {
-                        std::cout << "-";
+                        std::cout << "#";
                     }else if (i == (window.height - 3) / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 + err_resize.size() / 2){
                         std::cout << err_resize[t_index++];
                     }else if (j == 0 || j == window.width - 1) {
-                        std::cout << "|";
+                        std::cout << "#";
                     }else{
                         std::cout << " ";
                     }
                 }else{
                     if (i == 0 || i == window.height - 3) {
-                        std::cout << "-";
+                        std::cout << "#";
                     }else if (i > 4 && i < 16 && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2) {
                         std::cout << title[r_index][t_index++];
                         if(t_index == title[r_index].size())
@@ -117,7 +115,7 @@ void menuScreen(int selection)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << set[t_index++] << c.cReset();
                     }else if (j == 0 || j == window.width - 1) {
-                        std::cout << "|";
+                        std::cout << "#";
                     }else{
                         std::cout << ' ';
                     }
@@ -157,7 +155,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
             for (int j = 0; j < window.width; j++)
             {
                 if (i == 0 || i == window.height - 3) {
-                    std::cout << "-";
+                    std::cout << "#";
                 }else if(i > 7 && i <= 28  && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (i == 8) {
                         std::cout << c.getBC(12) << c.getC(7) << prompt[t_index++] << c.cReset();
@@ -178,7 +176,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
                 }else if(i == 29 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     std::cout << c.getBC(12) << c.getC(7) << pg[t_index++] << c.cReset();
                 }else if (j == 0 || j == window.width - 1) {
-                    std::cout << "|";
+                    std::cout << "#";
                 }else{
                     std::cout << ' ';
                 }
@@ -208,11 +206,11 @@ void settingWindow() {
             for (int j = 0; j < window.width; j++)
             {
                 if (i == 0 || i == window.height - 3) {
-                    std::cout << c.getBC(0) << "-";
+                    std::cout << c.getBC(0) << "#";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - inprogress.size() / 2 && j < (window.width - 2) / 2 + inprogress.size() / 2 + 2){
                     std::cout << c.getBC(0) << inprogress[t_index++];
                 }else if (j == 0 || j == window.width - 1) {
-                    std::cout << c.getBC(0) << "|";
+                    std::cout << c.getBC(0) << "#";
                 }else{
                     std::cout << c.getBC((j + r_index) % c.getSize()) << ' ';
                 }
@@ -243,7 +241,7 @@ void outputFileWindow(const std::string &filename, std::string err) {
             for (int j = 0; j < window.width; j++)
             {
                 if (i == 0 || i == window.height - 3) {
-                    std::cout << "-";
+                    std::cout << "#";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (err.size()){
                         std::cout << c.getC(r_index) << err[t_index++] << c.cReset();
@@ -257,7 +255,7 @@ void outputFileWindow(const std::string &filename, std::string err) {
                     else
                         std::cout << c.getBC(7) << " " << c.cReset();
                 }else if (j == 0 || j == window.width - 1) {
-                    std::cout << "|";
+                    std::cout << "#";
                 }else{
                     std::cout << ' ';
                 }
