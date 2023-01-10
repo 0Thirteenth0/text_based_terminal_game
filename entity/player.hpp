@@ -1,5 +1,5 @@
 
-class player
+class player : public entity
 {
 private:
     std::string name;

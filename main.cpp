@@ -72,11 +72,19 @@ void cursorSet(int y, int x) {
     std::cout << c;
 }
 
+// MISC lib
 #include "titleName.hpp"
 #include "color.hpp"
 #include "winSize.hpp"
 
-#include "player.hpp"
+// ### Entity lib
+#include "./entity/entity.hpp"
+#include "./entity/shop.hpp"
+#include "./entity/emermyENCT.hpp"
+#include "./entity/event.hpp"
+#include "./entity/player.hpp"
+
+// ### game window lib
 #include "gameMenu.hpp"
 #include "game.hpp"
 
