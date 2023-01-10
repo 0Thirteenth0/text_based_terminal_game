@@ -313,7 +313,7 @@ int gameMenu::menu() {
             select = choice;
             if (saveCreation()){
                 std::ofstream ofile;
-                ofile.open("./savegame/" + filename + ".txt");
+                ofile.open(filename = "./savegame/" + filename + ".txt");
                 ofile << loadedPlayer;
                 ofile.close();
                 break;
@@ -322,7 +322,7 @@ int gameMenu::menu() {
         }else if (select - '0' == 2 || (select == '\n' && choice == 2)) {
             select = choice;
             if(loadSave()){
-                std::ifstream ifile("./"+filename);
+                std::ifstream ifile(filename = "./"+filename);
                 if(ifile.is_open())
                    ifile >> loadedPlayer;
                 ifile.close();
