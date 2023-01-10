@@ -63,6 +63,7 @@
           way (mostlikely vector);
           1. ability to add little decoration ascii art into the output.
           2. ability to put entities onto the output.
+            * entities/paths '$'=Shop 'player'=Player 'X'=EnermyEncounter 'R'=RestArea
       4. UI, such as:
         - keybind hints
         - character status and inventory menu and UI icon. Example:
