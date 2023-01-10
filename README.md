@@ -64,6 +64,7 @@
           1. ability to add little decoration ascii art into the output.
           2. ability to put entities onto the output.
             * entities/paths '$'=Shop 'player'=Player 'X'=EnermyEncounter 'R'=RestArea
+              '?'=RandomEvent
       4. UI, such as:
         - keybind hints
         - character status and inventory menu and UI icon. Example:
@@ -71,6 +72,10 @@
 
         - Keybind to select path to take will simply be ',' or '<' and '>' or '.'
           or numkey 1/2/3/4 to select the path.
+      5. Battle Screen with enermy encounter with 'X' path.
+      6. Shop screen with '$' path
+      7. Random encounter screen with 'R' path.
+      8. Rest screen with 'R' path.
         
 
 
