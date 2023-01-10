@@ -2,7 +2,10 @@
 class entity
 {
 private:
-    /* data */
+
+protected:
+    int y = 0, x = 0;
+
 public:
     entity(/* args */);
     ~entity();
@@ -33,7 +36,10 @@ public:
 class event : public entity
 {
 private:
-    /* data */
+
+protected:
+    
+
 public:
     event(/* args */);
     ~event();

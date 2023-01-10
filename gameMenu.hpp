@@ -130,7 +130,7 @@ void menuScreen(int selection)
 void loadWindows(const std::vector<std::string> &saves, int select) {
     int r_index = 0, t_index = 0;
     std::vector<std::string> options;
-    std::string prompt = "    Load Saves    ";
+    std::string prompt = "    Load Saves    ", err_resize = "RESIZE";
     std::string pg = "page ";
     int cnt = 1;
     for (const auto &save : saves)
@@ -150,8 +150,13 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 2) {
+                if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
+                }else if(window.height < 32 || window.width < prompt.size() + 2) {
+                    if(i == window.height / 2 && j > window.width / 2 - err_resize.size()/2 && j <= window.width / 2 - err_resize.size()/2 + err_resize.size())
+                        std::cout << err_resize[t_index++];
+                    else
+                        std::cout << " ";
                 }else if(i > 7 && i <= 28  && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (i == 8) {
                         std::cout << c.getBC(12) << c.getC(7) << prompt[t_index++] << c.cReset();
@@ -171,8 +176,6 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
                     }
                 }else if(i == 29 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     std::cout << c.getBC(12) << c.getC(7) << pg[t_index++] << c.cReset();
-                }else if (j == 0 || j == window.width - 1) {
-                    std::cout << "#";
                 }else{
                     std::cout << ' ';
                 }
@@ -225,7 +228,7 @@ void settingWindow() {
 }
 
 void outputFileWindow(const std::string &filename, std::string err) {
-    std::string prompt = "Please Enter a Filename!", nameErr = "Error: Name is Too Long!";
+    std::string prompt = "Please Enter a Filename!", nameErr = "Error: Name is Too Long!", err_resize = "RESIZE";
     int r_index = 0, t_index = 0, ticks = 0;
     winSize window;
     while (!keyPressed[3])
@@ -237,8 +240,13 @@ void outputFileWindow(const std::string &filename, std::string err) {
         {
             for (int j = 0; j < window.width; j++)
             {
-                if (i == 0 || i == window.height - 2) {
+                if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
+                }else if(window.height < 5 || window.width < prompt.size() + 6) {
+                    if (i == window.height / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 - err_resize.size() / 2 + err_resize.size())
+                        std::cout << err_resize[t_index++];
+                    else
+                        std::cout << " ";
                 }else if(i == window.height / 2 - 2 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (err.size()){
                         std::cout << c.getC(r_index) << err[t_index++] << c.cReset();
@@ -246,13 +254,11 @@ void outputFileWindow(const std::string &filename, std::string err) {
                         std::cout << c.getC(r_index) << prompt[t_index++] << c.cReset();
                     else if (t_index < filename.size())
                         if (filename.size() <= prompt.size())
-                            std::cout << c.getBC(7) << c.getC(8) << filename[t_index++] << c.cReset();
+                            std::cout << c.getBC(7) << c.getC(4) << filename[t_index++] << c.cReset();
                         else
-                            std::cout << c.getBC(7) << c.getC(8) << nameErr[t_index++] << c.cReset();
+                            std::cout << c.getBC(7) << c.getC(4) << nameErr[t_index++] << c.cReset();
                     else
                         std::cout << c.getBC(7) << " " << c.cReset();
-                }else if (j == 0 || j == window.width - 1) {
-                    std::cout << "#";
                 }else{
                     std::cout << ' ';
                 }
@@ -387,7 +393,6 @@ bool gameMenu::saveCreation(){
 }
 
 bool gameMenu::loadSave(){
-    
     int select = 0;
     choice = 0;
     while (true)
