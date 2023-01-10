@@ -79,10 +79,6 @@ void cursorSet(int y, int x) {
 
 // ### Entity lib
 #include "./entity/entity.hpp"
-#include "./entity/shop.hpp"
-#include "./entity/emermyENCT.hpp"
-#include "./entity/event.hpp"
-#include "./entity/player.hpp"
 
 // ### game window lib
 #include "gameMenu.hpp"
