@@ -49,7 +49,9 @@ void addStatWindow(int select){
             t_index = 0;
             std::cout << std::endl;
         }
-        
+        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
+        cursorSet(window.height,0);
+        cursorSet(window.height - 1, 0);
         usleep(50000);
     }
 }
@@ -118,8 +120,11 @@ void menuScreen(int selection)
                 }
             }
             t_index = 0;
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
+        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
+        cursorSet(window.height,0);
+        cursorSet(window.height - 1, 0);
         if (++ticks % 30)
             ticks = 0;
         usleep(50000);
@@ -181,6 +186,9 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
             t_index = 0;
             std::cout << std::endl;
         }
+        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
+        cursorSet(window.height,0);
+        cursorSet(window.height - 1, 0);
         usleep(50000);
     }
     
@@ -214,7 +222,9 @@ void settingWindow() {
         }
         
         r_index++;
-        
+        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
+        std::cout << "\033["+ std::to_string(window.height) + ";0H";
+        std::cout << "\033["+ std::to_string(window.height - 1) + ";0H";
         std::cout << std::endl;
         usleep(200000);
     }
@@ -256,6 +266,9 @@ void outputFileWindow(const std::string &filename, std::string err) {
             t_index = 0;
             std::cout << std::endl;
         }
+        // the purpose of this cursor movement is to clear the undeleted output on the last two line of the terminal.
+        std::cout << "\033["+ std::to_string(window.height) + ";0H";
+        std::cout << "\033["+ std::to_string(window.height - 1) + ";0H";
         if(!(++ticks % 7))
             r_index = r_index == 0 ? 8 : 0;
         usleep(50000);

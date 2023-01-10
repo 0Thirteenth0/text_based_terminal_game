@@ -42,6 +42,8 @@
     - '<' or ',' and '>' or '.' to navigate through the list of saved progress.
     - Loads progress from save file in ./savegame folder.
       * !!- Currently only loads player data. -!!
+    - Things to Optimize:
+      * Order of savefile being listed is not in order, need a way to sort it by date.
  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
 #### Settings:

@@ -66,21 +66,24 @@ namespace fs = std::filesystem;
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include "titleName.hpp"
-#include "color.hpp"
-#include "winSize.hpp"
-
-#include "player.hpp"
-#include "gameMenu.hpp"
-#include "game.hpp"
-
-
-
 
 void cursorSet(int y, int x) {
     std::string c = "\033[" + std::to_string(y) + ";" + std::to_string(x) + "H";
     std::cout << c;
 }
+
+#include "titleName.hpp"
+#include "color.hpp"
+#include "winSize.hpp"
+
+#include "player.hpp"
+#include "game.hpp"
+#include "gameMenu.hpp"
+
+
+
+
+
 
 class BufferToggle
 {
@@ -124,6 +127,7 @@ int main(int argv, char** argc) {
     //     std::cout << i.substr(9) << "\t";
     // std::cout << "\n";
     game start;
+
 
     
     t.on();
