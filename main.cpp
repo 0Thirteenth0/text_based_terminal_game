@@ -72,6 +72,8 @@ namespace fs = std::filesystem;
 
 #include "player.hpp"
 #include "gameMenu.hpp"
+#include "game.hpp"
+
 
 
 
@@ -112,6 +114,7 @@ class BufferToggle
 
 
 int main(int argv, char** argc) {
+    system("clear");
     BufferToggle t;
     std::vector<std::string> save_games;
     t.off();

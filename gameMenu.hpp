@@ -33,9 +33,8 @@ bool special_characters(char c) {
 void addStatWindow(int select){
     int r_index = 0, t_index = 0;
     std::string header = "Assign Data";
+    winSize window;
     while (!keyPressed[4]) {
-        winSize window;
-        system("clear");
         std::cout << "\033[0;0H";
         window.update();
         r_index = 0, t_index = 0;
@@ -74,10 +73,9 @@ void menuScreen(int selection)
     title.push_back("/\\__|    (  <_> )  |  /|  | \\/   |  \\  ___/\\___  |");
     title.push_back("\\________|\\____/|____/ |__|  |___|  /\\___  > ____|");
     title.push_back("                                  \\/     \\/\\/     ");
+    winSize window;
     while (!keyPressed[0])
     {
-        winSize window;
-        system("clear");
         std::cout << "\033[0;0H";
         window.update();
         r_index = 0, t_index = 0;
@@ -146,7 +144,6 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
     while (!keyPressed[2])
     {
         winSize window;
-        system("clear");
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0, r_index = (select/20)*20;
@@ -194,10 +191,9 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
 void settingWindow() {
     std::string inprogress = "       In Progress!       ";
     int r_index = 0, t_index = 0, ticks = 0;
+    winSize window;
     while (!keyPressed[1])
     {
-        winSize window;
-        system("clear");
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0;
@@ -229,10 +225,9 @@ void settingWindow() {
 void outputFileWindow(const std::string &filename, std::string err) {
     std::string prompt = "Please Enter a Filename!", nameErr = "Error: Name is Too Long!";
     int r_index = 0, t_index = 0, ticks = 0;
+    winSize window;
     while (!keyPressed[3])
     {
-        winSize window;
-        system("clear");
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0;
@@ -322,7 +317,6 @@ int gameMenu::menu() {
                 std::ofstream ofile;
                 ofile.open("./savegame/" + filename + ".txt");
                 ofile << loadedPlayer;
-
                 ofile.close();
                 break;
             }
@@ -346,7 +340,6 @@ int gameMenu::menu() {
 
 bool gameMenu::saveCreation(){
     std::string fExistErr = "";
-    
     int key = '0';
     while (true)
     {
@@ -400,23 +393,26 @@ bool gameMenu::loadSave(){
         keyPressed[2] = true;
         lockf.join();
         keyPressed[2] = false;
-        if (select == ','){
+        switch (select)
+        {
+        case ',':
             choice--;
             if (choice < 0)
                 choice = saves.size() - 1;
-        }else if (select == '.'){
+            break;
+        case '.':
             choice++;
             if (choice == saves.size())
                 choice = 0;
-        }
-        if (select == 27)
+            break;
+        case 27:
             return false;
-        if (select == '\n')
-        {
+        case '\n':
             filename = saves[choice];
             return true;
+        default:
+            break;
         }
-        
     }
     return true;
 }
@@ -452,24 +448,25 @@ bool gameMenu::assignStat() {
         keyPressed[4] = true;
         lockf.join();
         keyPressed[4] = false;
-        if (select == ','){
+        switch (select)
+        {
+        case ',':
             choice--;
             if (choice < 0)
                 choice = saves.size() - 1;
-        }else if (select == '.'){
+            break;
+        case '.':
             choice++;
             if (choice == saves.size())
                 choice = 0;
-        }
-        // 27 == esc
-        if (select == 27)
+            break;
+        case 27:
             return false;
-
-
-        if (select == '\n') {
+        case '\n':
             return true;
+        default:
+            break;
         }
-        
     }
     return false;
 }
