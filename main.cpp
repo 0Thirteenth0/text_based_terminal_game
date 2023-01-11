@@ -85,9 +85,6 @@ void cursorSet(int y, int x) {
 
 
 
-
-
-
 class BufferToggle
 {
     private:

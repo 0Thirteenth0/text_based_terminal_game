@@ -21,6 +21,7 @@ private:
     unsigned int level;
     int money;
     int statPoint;
+    bool s_StatAssigned = false;
     std::map<std::string, float> baseStats, stats;
 
 public:
@@ -94,7 +95,7 @@ player::player(/* args */)
 
 // extract data into save file;
 std::ostream &operator<<(std::ofstream &out, player p) {
-    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money<< "\n";
+    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money<< p.s_StatAssigned <<"\n";
     for (auto &i : p.baseStats)
         out << i.first << " " << i.second << "\t";
     out << "\n";
@@ -119,7 +120,9 @@ std::istream &operator>>(std::ifstream &in, player p) {
     index = line.find(' ', index) + 1;
     p.exp = std::stod(line.substr(index, line.find(' ', index) - index));
     index = line.find(' ', index) + 1;
-    p.money = std::stoi(line.substr(index));
+    p.money = std::stoi(line.substr(index, line.find(' ', index) - index));
+    index = line.find(' ', index) + 1;
+    p.s_StatAssigned = std::stoi(line.substr(index));
     index = 0;
     getline(in, line);
     while (index < line.size())

@@ -14,29 +14,17 @@ public:
 };
 
 // ANSI Color Manip...
-color::color() : reset("\u001b[0m"), cSize(16) {
-    c = new std::string [cSize];
-    bc = new std::string [cSize];
-    int code = 0;
-    for (int i = 0; i < cSize; i++)
-    {
-        if (code == 8)
-            code = 0;
-        if (i < cSize / 2)
-            c[i] = "\u001b[3" + std::to_string(code++) + "m";
-        else
-            c[i] = "\u001b[3" + std::to_string(code++) + ";1m";
-    }
-    code = 0;
-    for (int i = 0; i < cSize; i++)
-    {
-        if (code == 8)
-            code = 0;
-        if (i < cSize / 2)
-            bc[i] = "\u001b[4" + std::to_string(code++) + "m";
-        else
-            bc[i] = "\u001b[4" + std::to_string(code++) + ";1m";
-    }
+color::color() : reset("\u001b[0m"), cSize(16*16) {
+    c = new  std::string [cSize];
+    bc = new  std::string [cSize];
+    int count = 0;
+    for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
+            c[count++] = "\u001b[38;5;" + std::to_string(i * 16 + j) + "m";
+    count = 0;
+    for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
+            bc[count++] = "\u001b[48;5;" + std::to_string(i * 16 + j) + "m";
 }
 color::~color() {
     delete[] c;

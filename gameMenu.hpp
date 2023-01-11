@@ -49,7 +49,6 @@ void addStatWindow(int select){
             t_index = 0;
             std::cout << std::endl;
         }
-        
         usleep(50000);
     }
 }
