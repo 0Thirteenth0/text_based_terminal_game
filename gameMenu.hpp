@@ -187,7 +187,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
 
 void settingWindow() {
     std::string inprogress = "       In Progress!       ";
-    int r_index = 0, t_index = 0, ticks = 0;
+    int left = 0, right = 0, t_index = 0, ticks = 0;
     winSize window;
     while (!keyPressed[1])
     {
@@ -205,13 +205,14 @@ void settingWindow() {
                 }else if (j == 0 || j == window.width - 1) {
                     std::cout << c.getBC(0) << "#";
                 }else{
-                    std::cout << c.getBC((j + r_index) % c.getSize()) << ' ';
+                    std::cout << c.getBC((j + left - right) % c.getSize()) << ' ';
                 }
+                right--;
                 std::cout << c.cReset();
             }
             t_index = 0;
         } 
-        r_index++;
+        left += 4, right++;
         std::cout << std::endl;
         usleep(200000);
     }
