@@ -49,7 +49,8 @@
 #### Settings:
     - This functionality is not available as of now.
       * The settings that I'm thinking to manipulate is the color/theme of the game.
-![ezgif com-gif-maker-4](https://user-images.githubusercontent.com/95335912/211428175-930efbed-4cf5-4811-a249-dc0c32e0976d.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211701350-35acec43-d8dd-4dd1-bb21-65e0048ce80b.gif)
+
 
 # In-Game:
 ### Game Design and Concept:
