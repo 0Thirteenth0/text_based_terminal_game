@@ -55,7 +55,8 @@
 #### Attribute Assign:
     - Assigns attribute points to the player
       * CURRENTLY STILL IN PROGRESS (ALMOST DONE).
-      
+![Screen Recording 2023-01-12 at 11 09 07 AM](https://user-images.githubusercontent.com/95335912/212159317-94350a5e-9b94-4b3d-9cfa-bbff5e63c7f4.gif)
+
 
 
 # In-Game:
