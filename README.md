@@ -27,7 +27,7 @@
     - Num key 1-3 to pick options
     - '<' or ',' to navigate up
     - '>' or '.' to navigate down
-![ezgif com-gif-maker-2](https://user-images.githubusercontent.com/95335912/211420343-eb76a431-1018-4cad-84dd-0c756c954e01.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/212003722-9e3c62e9-e69f-4081-9305-b5a795feb549.gif)
     
     1. New Game - creates a save file in .txt to the ./savegame folder.
     2. Load Game - loads progress from ./savegame folder.
