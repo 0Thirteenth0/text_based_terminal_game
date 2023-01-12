@@ -27,8 +27,8 @@
     - Num key 1-3 to pick options
     - '<' or ',' to navigate up
     - '>' or '.' to navigate down
-![Screen Recording 2023-01-12 at 11 09 07 AM](https://user-images.githubusercontent.com/95335912/212160711-1c7e2027-b7fe-4e7f-bf68-fddb0cda0482.gif)
-    
+![ezgif com-gif-maker-2](https://user-images.githubusercontent.com/95335912/212165285-c81e1d45-f849-44f1-839b-9bcec65a011d.gif)
+ 
     1. New Game - creates a save file in .txt to the ./savegame folder.
     2. Load Game - loads progress from ./savegame folder.
     3. Setting - supposely can change the style/color of game.
@@ -37,7 +37,8 @@
     - Prompts to enter a new save game name to create new save in ./savegame folder.
     - Name must be between 1 and 14 length characters.
     - Name must not be already existing in the ./savegame folder.
-![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/95335912/211424065-c48274e6-27ea-4b72-bb99-0cc848944b98.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/212164278-edef7502-6bbd-4960-aad5-6275f26721a6.gif)
+
 
 #### Load Game Menu:
     - '<' or ',' and '>' or '.' to navigate through the list of saved progress.
@@ -45,7 +46,7 @@
       * !!- Currently only loads player data. -!!
     - Things to Optimize:
       * Order of savefile being listed is not in order, need a way to sort it by date.
- ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211419640-01d30881-b90a-49f6-b1a7-c2670d0ee67b.gif)
 
 #### Settings:
     - This functionality is not available as of now.
@@ -55,7 +56,8 @@
 #### Attribute Assign:
     - Assigns attribute points to the player
       * CURRENTLY STILL IN PROGRESS (ALMOST DONE).
-![Screen Recording 2023-01-12 at 11 09 07 AM](https://user-images.githubusercontent.com/95335912/212159317-94350a5e-9b94-4b3d-9cfa-bbff5e63c7f4.gif)
+![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/95335912/212165659-80c06c4a-ec1f-4866-af80-355dc3ce493c.gif)
+
 
 
 
