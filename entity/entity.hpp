@@ -31,6 +31,8 @@ public:
     friend std::ostream &operator<<(std::ofstream &, player);
     friend std::istream &operator>>(std::ifstream &, player);
     void name_change(std::string);
+    std::map<std::string,float> &getBaseStats() { return baseStats; }
+    int &getAP() {return statPoint;}
 };
 
 // Derived class of entity : event

@@ -80,18 +80,18 @@ char getch() {
 
 int main() {
     color c;
-    for (int i = 0; i < c.getSize(); i++){
-        std::cout << c.getBC(i);
-        for (int j = 0; j < c.getSize(); j++)
-            std::cout << c.getC(j) << j << " ";
-        std::cout << c.cReset() << std::endl;
-    }
-    // for (int i = 0; i < c.getSize(); i++)
-    //     std::cout << c.getC(i) << i;
-    // std::cout << std::endl;
-    // for (int i = 0; i < c.getSize(); i++)
-    //     std::cout << c.getBC(i) << i;
-    // std::cout << std::endl;
+    // for (int i = 0; i < c.getSize(); i++){
+    //     std::cout << c.getBC(i);
+    //     for (int j = 0; j < c.getSize(); j++)
+    //         std::cout << c.getC(j) << j << " ";
+    //     std::cout << c.cReset() << std::endl;
+    // }
+    for (int i = 0; i < c.getSize(); i++)
+        std::cout << c.getC(i) << i << c.cReset();
+    std::cout << std::endl;
+    for (int i = 0; i < c.getSize(); i++)
+        std::cout << c.getBC(i) << i << c.cReset();
+    std::cout << std::endl;
     
     return 0;
     

@@ -128,7 +128,6 @@ int main(int argv, char** argc) {
     // std::cout << "\n";
     game start;
 
-
-    
     t.on();
+    return 0;
 }

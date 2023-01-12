@@ -28,10 +28,15 @@ bool special_characters(char c) {
     return true;
 }
 
-void addStatWindow(int select){
-    int r_index = 0, t_index = 0;
-    std::string header = "Assign Data";
+void addStatWindow(player lp, std::vector<std::string> name, int select, int AP){
+    int r_index = 0, t_index = 0, count = 0, ticks = 0;
+    std::string header = "Assign Stat Points", err_resize = "RESIZE", symbol = "[+]", aPoints = "Available:";
+    aPoints += std::string(40 - std::to_string(AP).size() - aPoints.size(), ' ') + std::to_string(AP);
     winSize window;
+    std::vector<std::string> items;
+    for (const auto &i : name)
+        items.push_back((count == select ? "[" + i : i) + std::string((count++ == select ? 37 : 38) - (i.size() + 1),' '));
+    count = 231;
     while (!keyPressed[4]) {
         std::cout << "\033[0;0H";
         window.update();
@@ -42,6 +47,34 @@ void addStatWindow(int select){
             {
                 if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                     std::cout << "#";
+                }else if(window.height < 18 || window.width < 45) {
+                    if (i == window.height / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 - err_resize.size() / 2 + err_resize.size())
+                        std::cout << err_resize[t_index++];
+                    else
+                        std::cout << " ";
+                }else if(i > window.height / 2 - name.size() / 2 &&  i <= window.height / 2 - name.size() / 2 + name.size() + 1 && j > window.width / 2 - 20 && j <= window.width / 2 + 20){
+                    if (i == window.height / 2 - name.size() / 2 + 1){
+                        if(j > window.width / 2 - header.size() / 2 && j <= window.width / 2 - header.size() / 2 + header.size())
+                            std::cout << c.getBC(4) << header[t_index++] << c.cReset();
+                        else
+                            std::cout << c.getBC(4) << " " << c.cReset();
+                    }else if (i > window.height / 2 - name.size() / 2 + 1){
+                        std::cout << c.getBC(7) << c.getC(0);
+                        if (j > window.width / 2 - 20 && j <= window.width / 2 + 17)
+                        {
+                            std::cout << items[r_index][t_index++] << c.cReset();
+                            if (j == window.width / 2 + 17)
+                                t_index = 0;
+                        }else if (j > window.width / 2 + 17){
+                            std::cout << (select == r_index ? c.getBC(4) + c.getC(15) : c.getBC(7) + c.getC(0)) << symbol[t_index++] << c.cReset();
+                            if (t_index == symbol.size())
+                                r_index++;
+                        }
+                    }else{
+                        std::cout << c.getBC(12) << " " << c.cReset();
+                    }
+                }else if(i == window.height / 2 - name.size() / 2 + name.size() + 2 && j > window.width / 2 - 20 && j <= window.width / 2 + 20){
+                    std::cout<< c.getBC(4) + (t_index > aPoints.size() - std::to_string(AP).size() - 1 ? c.getC(count): "") << aPoints[t_index++] << c.cReset();
                 }else{
                     std::cout << " ";
                 }
@@ -49,6 +82,15 @@ void addStatWindow(int select){
             t_index = 0;
             std::cout << std::endl;
         }
+        if (ticks++ > 18)
+            if (--count < 196)
+                count = 231;
+        // for (const auto &i : items)
+        // {
+        //     std::cout << i << "\t";
+        // }
+        // std::cout << std::endl;
+        
         usleep(50000);
     }
 }
@@ -56,7 +98,7 @@ void addStatWindow(int select){
 void menuScreen(int selection)
 {
     std::vector<std::string> title;
-    std::string err_resize = "RESIZE", newGame = "[1] New Game", load = "[2] Load Save", set = "[3] Setting";
+    std::string err_resize = "RESIZE", newGame = "[1] New Game", load = "[2] Load Save", set = "[3] Setting", ext = "[4] Exit";
     int ticks = 0, t_index = 0, r_index = 0;
     title.push_back("    .___        _____.__       .__  __            ");
     title.push_back("    |   | _____/ ____\\__| ____ |__|/  |_  ____    ");
@@ -109,6 +151,10 @@ void menuScreen(int selection)
                         if (selection == 3)
                             std::cout << c.getBC(2) << c.getC(4);
                         std::cout << set[t_index++] << c.cReset();
+                    }else if(i == (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size() + 8 : 24) && j > window.width / 2 - newGame.size() / 2 && j <= (window.width / 2 - newGame.size() / 2) + ext.size()){
+                        if (selection == 4)
+                            std::cout << c.getBC(2) << c.getC(4);
+                        std::cout << ext[t_index++] << c.cReset();
                     }else{
                         std::cout << ' ';
                     }
@@ -267,19 +313,19 @@ char getch() {
     char buf = 0;
     struct termios old = {0};
     if (tcgetattr(0, &old) < 0)
-            perror("tcsetattr()");
+        perror("tcsetattr()");
     old.c_lflag &= ~ICANON;
     old.c_lflag &= ~ECHO;
     old.c_cc[VMIN] = 1;
     old.c_cc[VTIME] = 0;
     if (tcsetattr(0, TCSANOW, &old) < 0)
-            perror("tcsetattr ICANON");
+        perror("tcsetattr ICANON");
     if (read(0, &buf, 1) < 0)
-            perror ("read()");
+        perror ("read()");
     old.c_lflag |= ICANON;
     old.c_lflag |= ECHO;
     if (tcsetattr(0, TCSADRAIN, &old) < 0)
-            perror ("tcsetattr ~ICANON");
+        perror ("tcsetattr ~ICANON");
     return (buf);
 }
 
@@ -303,10 +349,10 @@ int gameMenu::menu() {
         if (select == ','){
             choice--;
             if (choice < 0)
-                choice = 3;
+                choice = 4;
         }else if (select == '.'){
             choice++;
-            if (choice > 3)
+            if (choice > 4)
                 choice = 0;
         }
         if (select - '0' == 1 || (select == '\n' && choice == 1)){
@@ -328,9 +374,10 @@ int gameMenu::menu() {
                 ifile.close();
                 break;
             }
-            
         }else if (select - '0' == 3 || (select == '\n' && choice == 3)) {
             settingMenu();
+        }else if (select - '0' == 4 || (select == '\n' && choice == 4)){
+            exit(EXIT_SUCCESS);
         }
     }
     return select;
@@ -435,9 +482,19 @@ gameMenu::~gameMenu(){}
 bool gameMenu::assignStat() {
     int select = 0;
     choice = 0;
+    std::vector<std::string> statLable;
+    std::map<std::string, float> old = loadedPlayer.getBaseStats();
+    statLable.push_back(B_HP);
+    statLable.push_back(B_ATT);
+    statLable.push_back(B_MATT);
+    statLable.push_back(B_CRITC);
+    statLable.push_back(B_CRITR);
+    statLable.push_back(B_DEF);
+    statLable.push_back(B_MDEF);
+    statLable.push_back(B_SPD);
     while (true)
     {
-        std::thread lockf(addStatWindow, choice);        
+        std::thread lockf(addStatWindow, loadedPlayer, statLable, choice, loadedPlayer.getAP());        
         select = getch();
         // Set the flag with true to break the loop.
         keyPressed[4] = true;
@@ -448,11 +505,11 @@ bool gameMenu::assignStat() {
         case ',':
             choice--;
             if (choice < 0)
-                choice = saves.size() - 1;
+                choice = statLable.size() - 1;
             break;
         case '.':
             choice++;
-            if (choice == saves.size())
+            if (choice == statLable.size())
                 choice = 0;
             break;
         case 27:

@@ -13,8 +13,8 @@ public:
 
 game::game(/* args */) {
     update();
-    if (selection == 0)
-        assignStat();
+    assignStat();
+    
     
 }
 
