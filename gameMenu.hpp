@@ -97,9 +97,9 @@ void addStatWindow(player lp, std::vector<std::string> name, int select, int AP)
 
 void menuScreen(int selection)
 {
-    std::vector<std::string> title;
+    std::vector<std::string> title; 
     std::string err_resize = "RESIZE", newGame = "[1] New Game", load = "[2] Load Save", set = "[3] Setting", ext = "[4] Exit";
-    int ticks = 0, t_index = 0, r_index = 0;
+    int ticks = 0, t_index = 0, r_index = 0, cRand = rand() % c.getSize();
     title.push_back("    .___        _____.__       .__  __            ");
     title.push_back("    |   | _____/ ____\\__| ____ |__|/  |_  ____    ");
     title.push_back("    |   |/    \\   __\\|  |/    \\|  \\   __\\/ __ \\   ");
@@ -136,7 +136,7 @@ void menuScreen(int selection)
                     if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
                         std::cout << "#";
                     }else if (i > (window.height / 2 > 10 ? window.height / 2 - title.size() : 4) && i < (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size(): title.size() + 4) && j > window.width / 2 - title[r_index].size() / 2 && j < (window.width - 2) / 2 + title[r_index].size() / 2 + 2){
-                        std::cout << title[r_index][t_index++];
+                        std::cout << c.getC(cRand) << title[r_index][t_index++] << c.cReset();
                         if(t_index == title[r_index].size())
                             r_index++;
                     }else if(i == (window.height / 2 > 10 ? window.height / 2 - title.size() + title.size() + 2 : 18) && j > window.width / 2 - newGame.size() / 2 && j < (window.width - 2) / 2 + newGame.size() / 2 + 2){
@@ -163,8 +163,11 @@ void menuScreen(int selection)
             t_index = 0;
             std::cout << std::endl;
         }
-        if (++ticks % 30)
+        if (!(++ticks % 3)){
             ticks = 0;
+            cRand = rand() % c.getSize();
+        }
+
         usleep(50000);
     }
 }

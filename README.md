@@ -32,6 +32,7 @@
     1. New Game - creates a save file in .txt to the ./savegame folder.
     2. Load Game - loads progress from ./savegame folder.
     3. Setting - supposely can change the style/color of game.
+    4. Exit - exits program with exit(EXIT_SUCCESS);
 #### New Game:
     - Prompts to enter a new save game name to create new save in ./savegame folder.
     - Name must be between 1 and 14 length characters.
@@ -50,6 +51,11 @@
     - This functionality is not available as of now.
       * The settings that I'm thinking to manipulate is the color/theme of the game.
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211701350-35acec43-d8dd-4dd1-bb21-65e0048ce80b.gif)
+
+#### Attribute Assign:
+    - Assigns attribute points to the player
+      * CURRENTLY STILL IN PROGRESS (ALMOST DONE).
+      
 
 
 # In-Game:
