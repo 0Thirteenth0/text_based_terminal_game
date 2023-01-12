@@ -97,7 +97,7 @@ player::player(/* args */)
 
 // extract data into save file;
 std::ostream &operator<<(std::ofstream &out, player p) {
-    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money<< p.s_StatAssigned <<"\n";
+    out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money << " " << p.s_StatAssigned <<"\n";
     for (auto &i : p.baseStats)
         out << i.first << " " << i.second << "\t";
     out << "\n";

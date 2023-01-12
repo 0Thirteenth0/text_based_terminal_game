@@ -204,7 +204,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
                         std::cout << " ";
                 }else if(i > window.height / 2 - window.height / 3 && i <= window.height / 2 - window.height / 3 + 21 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
                     if (i == window.height / 2 - window.height / 3 + 1) {
-                        std::cout << c.getBC(12) << c.getC(7) << prompt[t_index++] << c.cReset();
+                        std::cout << c.getBC(4) << c.getC(7) << prompt[t_index++] << c.cReset();
                     }else if (i > window.height / 2 - window.height / 3 + 1 && r_index < options.size() && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2) {
                         if (select == r_index)
                                 std::cout << c.getBC(4) << c.getC(7);
@@ -220,7 +220,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
                         std::cout << c.getBC(7) << " " << c.cReset();
                     }
                 }else if(i == window.height / 2 - window.height / 3 + 22 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
-                    std::cout << c.getBC(12) << c.getC(7) << pg[t_index++] << c.cReset();
+                    std::cout << c.getBC(4) << c.getC(7) << pg[t_index++] << c.cReset();
                 }else{
                     std::cout << ' ';
                 }
@@ -307,7 +307,7 @@ void outputFileWindow(const std::string &filename, std::string err) {
             std::cout << std::endl;
         }
         if(!(++ticks % 7))
-            r_index = r_index == 0 ? 8 : 0;
+            r_index = r_index == 0 ? 15 : 0;
         usleep(50000);
     }
 }
@@ -516,9 +516,9 @@ bool gameMenu::assignStat() {
                 choice = 0;
             break;
         case 27:
-            return false;
+            break;
         case '\n':
-            return true;
+            break;
         default:
             break;
         }
