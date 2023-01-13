@@ -13,6 +13,15 @@ public:
 
 game::game(/* args */) {
     update();
+    if (!loadedPlayer.s_StatAssigned)
+    {
+        if (assignStat()){
+            loadedPlayer.s_StatAssigned  = true;
+            
+        }
+            
+    }
+    
     assignStat();
     
     

@@ -21,10 +21,10 @@ private:
     unsigned int level;
     int money;
     int statPoint;
-    bool s_StatAssigned = false;
     std::map<std::string, float> baseStats, stats;
 
 public:
+    bool s_StatAssigned = false;
     player(/* args */);
     ~player();
     void add_stat(std::string, double);
@@ -33,6 +33,7 @@ public:
     void name_change(std::string);
     std::map<std::string,float> &getBaseStats() { return baseStats; }
     int &getAP() {return statPoint;}
+    void operator=(const player &);
 };
 
 // Derived class of entity : event
@@ -93,6 +94,13 @@ player::player(/* args */)
     baseStats[B_CRITR] = stats[CRITR] = 10;
     baseStats[B_SPD] = stats[SPD] = 10;
     statPoint = 10;
+    s_StatAssigned = false;
+}
+
+void player::operator=(const player & cpy){
+    name = cpy.name, exp = cpy.exp, expNeeded = cpy.expNeeded, level = cpy.level, money = cpy.money;
+    statPoint= cpy.statPoint, s_StatAssigned = cpy.s_StatAssigned;
+    baseStats = cpy.baseStats, stats = cpy.stats;
 }
 
 // extract data into save file;

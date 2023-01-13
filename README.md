@@ -19,7 +19,7 @@
                     #   IV. May add in Text-log functionality.                      #
                     # ############################################################# #
 
-(<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< IN-PROGRESS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ## GameMenu:
   NAV for game menu
@@ -59,10 +59,8 @@
 ![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/95335912/212165659-80c06c4a-ec1f-4866-af80-355dc3ce493c.gif)
 
 
-
-
 # In-Game:
-### Game Design and Concept:
+ ### Game Design and Concept:
   #### Planning:
     - Design:
       1. Frame of the game will be with "#", empty backgrounds will be ' '.
@@ -86,7 +84,7 @@
           or numkey 1/2/3/4 to select the path.
       5. Battle Screen with enermy encounter with 'X' path.
       6. Shop screen with '$' path
-      7. Random encounter screen with 'R' path.
+      7. Random encounter screen with '?' path.
       8. Rest screen with 'R' path.
         
 
