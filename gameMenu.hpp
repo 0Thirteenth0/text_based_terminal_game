@@ -529,11 +529,12 @@ bool gameMenu::assignStat() {
         keyPressed[4] = true;
         lockf.join();
         keyPressed[4] = false;
+        int s = (loadedPlayer.getAP() > 0 ? 0 : statLable.size());
         switch (select)
         {
         case ',':
             choice--;
-            if (choice < (loadedPlayer.getAP() ? 0 : statLable.size()))
+            if (choice < s)
                 choice = statLable.size() + 1;
             break;
         case '.':

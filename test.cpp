@@ -4,6 +4,13 @@
 #include <termios.h>
 #include <sstream>
 #include <cmath>
+#include <sys/ioctl.h>
+#include <vector>
+#include <filesystem>
+#include <atomic>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 using namespace std;
 
 
@@ -79,6 +86,23 @@ char getch() {
 
 
 int main() {
+    namespace fs = boost::filesystem;
+    fs::path someDir("/path/to/somewhere");
+    fs::directory_iterator end_iter;
+
+    typedef std::multimap<std::time_t, fs::path> result_set_t;
+    result_set_t result_set;
+
+    if ( fs::exists(someDir) && fs::is_directory(someDir))
+    {
+    for( fs::directory_iterator dir_iter(someDir) ; dir_iter != end_iter ; ++dir_iter)
+    {
+        if (fs::is_regular_file(dir_iter->status()) )
+        {
+        result_set.insert(result_set_t::value_type(fs::last_write_time(dir_iter->path()), *dir_iter));
+        }
+    }
+    }
     color c;
     // for (int i = 0; i < c.getSize(); i++){
     //     std::cout << c.getBC(i);
