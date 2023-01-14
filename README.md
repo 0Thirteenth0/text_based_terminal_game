@@ -56,7 +56,7 @@
 #### Attribute Assign:
     - Assigns attribute points to the player
       * CURRENTLY STILL IN PROGRESS (ALMOST DONE).
-![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/95335912/212165659-80c06c4a-ec1f-4866-af80-355dc3ce493c.gif)
+![ezgif com-gif-maker-4](https://user-images.githubusercontent.com/95335912/212501625-7e162433-0eb3-46c6-99b8-14cd07829d6f.gif)
 
 
 # In-Game:
