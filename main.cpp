@@ -119,13 +119,8 @@ class BufferToggle
 int main(int argv, char** argc) {
     system("clear");
     BufferToggle t;
-    std::vector<std::string> save_games;
     t.off();
-    // for (const auto & entry : fs::directory_iterator("savegame"))
-    //     save_games.push_back(entry.path());
-    // for (const auto & i : save_games)
-    //     std::cout << i.substr(9) << "\t";
-    // std::cout << "\n";
+    
     game start;
 
     t.on();

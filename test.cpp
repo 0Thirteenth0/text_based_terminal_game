@@ -48,19 +48,24 @@ color::color() : reset("\u001b[0m"), cSize(16*16) {
         for (int j = 0; j < 16; j++)
             bc[count++] = "\u001b[48;5;" +  to_string(i * 16 + j) + "m ";
 }
+
 color::~color() {
     delete[] c;
     delete[] bc;
 }
+
  string color::getC(int x) const{
     return c[x];
 }
+
  string color::getBC(int x) const{
     return bc[x];
 }
+
  string color::cReset() const {
     return reset;
 }
+
 int color::getSize() const {
     return cSize;
 }
@@ -85,25 +90,7 @@ char getch() {
     return (buf);
 }
 
-
 int main() {
-    namespace fs = boost::filesystem;
-    fs::path someDir("/path/to/somewhere");
-    fs::directory_iterator end_iter;
-
-    typedef std::multimap<std::time_t, fs::path> result_set_t;
-    result_set_t result_set;
-
-    if ( fs::exists(someDir) && fs::is_directory(someDir))
-    {
-    for( fs::directory_iterator dir_iter(someDir) ; dir_iter != end_iter ; ++dir_iter)
-    {
-        if (fs::is_regular_file(dir_iter->status()) )
-        {
-        result_set.insert(result_set_t::value_type(fs::last_write_time(dir_iter->path()), *dir_iter));
-        }
-    }
-    }
     color c;
     // for (int i = 0; i < c.getSize(); i++){
     //     std::cout << c.getBC(i);

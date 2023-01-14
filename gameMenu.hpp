@@ -37,7 +37,7 @@ void addStatWindow(player lp, std::vector<std::string> name, int select, int AP)
     winSize window;
     std::vector<std::string> items;
     for (const auto &i : name){
-        items.push_back((count == select ? "[" + i : i) + std::string((count == select ? 37 : 38) - (i.size() + 1),' '));
+        items.push_back((count == select ? "[" + i : i) + std::string((count == select ? 37 : 38) - (i.size() + 1) - (std::to_string(lp.getBaseStats()[i]).substr(0,std::to_string(lp.getBaseStats()[i]).find('.') + 3).size() + 1),' ') + std::to_string(lp.getBaseStats()[i]).substr(0, std::to_string(lp.getBaseStats()[i]).find('.') + 3) + " ");
         count++;
     }
     aply = (select == items.size() ?  "[  " + aply + "  ]" : "[    " + aply + "    ]");

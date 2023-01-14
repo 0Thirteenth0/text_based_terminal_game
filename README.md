@@ -54,8 +54,11 @@
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/211701350-35acec43-d8dd-4dd1-bb21-65e0048ce80b.gif)
 
 #### Attribute Assign:
-    - Assigns attribute points to the player
-      * CURRENTLY STILL IN PROGRESS (ALMOST DONE).
+    - Assigns attribute points from leveling to the player.
+      * Stats points weight still need to be balanced.
+        ; Right now for testing critC is +1 for every attribute points to balance starting AP
+          will be adjusted to 0.01 and every attribute points added to critC will +0.01 to
+          base critC.
 ![ezgif com-gif-maker-4](https://user-images.githubusercontent.com/95335912/212501625-7e162433-0eb3-46c6-99b8-14cd07829d6f.gif)
 
 
