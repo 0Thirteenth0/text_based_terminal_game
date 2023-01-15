@@ -28,8 +28,8 @@ public:
     player(/* args */);
     ~player();
     void add_stat(std::string, double);
-    friend std::ostream &operator<<(std::ofstream &, player);
-    friend std::istream &operator>>(std::ifstream &, player);
+    friend std::ostream &operator<<(std::ofstream &, player &);
+    friend std::istream &operator>>(std::ifstream &, player& );
     void name_change(std::string);
     std::map<std::string,float> &getBaseStats() { return baseStats; }
     int &getAP() {return statPoint;}
@@ -104,7 +104,7 @@ void player::operator=(const player & cpy){
 }
 
 // extract data into save file;
-std::ostream &operator<<(std::ofstream &out, player p) {
+std::ostream &operator<<(std::ofstream &out, player &p) {
     out << p.name << " " << p.level << " " << p.statPoint << " " << p.expNeeded << " " << p.exp << " " << p.money << " " << p.s_StatAssigned <<"\n";
     for (auto &i : p.baseStats)
         out << i.first << " " << i.second << "\t";
@@ -115,7 +115,7 @@ std::ostream &operator<<(std::ofstream &out, player p) {
     return out;
 }
 // read data into game
-std::istream &operator>>(std::ifstream &in, player p) {
+std::istream &operator>>(std::ifstream &in, player &p) {
     std::string line = "";
     int index = 0;
     std::string portion;

@@ -30,7 +30,7 @@ bool special_characters(char c) {
     return true;
 }
 
-void addStatWindow(player lp, std::vector<std::string> name, int select, int AP){
+void addStatWindow(player lp, std::vector<std::string> name, int select, int AP, std::string errStat){
     int r_index = 0, t_index = 0, count = 0, ticks = 0;
     std::string header = "Assign Stat Points", err_resize = "RESIZE", symbol = "[+]", aPoints = "Available:", aply = "Apply", rst = "Reset";
     aPoints += std::string(40 - std::to_string(AP).size() - aPoints.size(), ' ') + std::to_string(AP);
@@ -58,6 +58,11 @@ void addStatWindow(player lp, std::vector<std::string> name, int select, int AP)
                         std::cout << err_resize[t_index++];
                     else
                         std::cout << " ";
+                }else if(errStat.size() && (i >= window.height / 2 - 1 && i <= window.height/2 + 1) && j > 5 && j < window.width - 6) {
+                        if (i == window.height/2 && j > window.width / 2 - errStat.size() / 2 && j <= window.width / 2 - errStat.size() / 2 + errStat.size())
+                            std::cout << c.getBC(196) << errStat[t_index++] << c.cReset();
+                        else
+                            std::cout << c.getBC(196) << " " << c.cReset();
                 }else if(i > window.height / 2 - name.size() - 2 &&  i <= window.height / 2 - name.size() + name.size() - 1 && j > window.width / 2 - 20 && j <= window.width / 2 + 20){
                     if (i == window.height / 2 - name.size() - 1){
                         if(j > window.width / 2 - header.size() / 2 && j <= window.width / 2 - header.size() / 2 + header.size())
@@ -397,10 +402,7 @@ int gameMenu::menu() {
         }else if (select - '0' == 2 || (select == '\n' && choice == 2)) {
             select = choice;
             if(loadSave()){
-                std::ifstream ifile(filename = "./"+filename);
-                if(ifile.is_open())
-                   ifile >> loadedPlayer;
-                ifile.close();
+                loadGame();
                 break;
             }
         }else if (select - '0' == 3 || (select == '\n' && choice == 3)) {
@@ -510,6 +512,7 @@ gameMenu::~gameMenu(){}
 
 bool gameMenu::assignStat() {
     int select = 0;
+    std::string errorMessage = "";
     choice = 0;
     std::vector<std::string> statLable;
     player old = loadedPlayer;
@@ -523,12 +526,13 @@ bool gameMenu::assignStat() {
     statLable.push_back(B_SPD);
     while (true)
     {
-        std::thread lockf(addStatWindow, loadedPlayer, statLable, choice, loadedPlayer.getAP());        
+        std::thread lockf(addStatWindow, loadedPlayer, statLable, choice, loadedPlayer.getAP(), errorMessage);        
         select = getch();
         // Set the flag with true to break the loop.
         keyPressed[4] = true;
         lockf.join();
         keyPressed[4] = false;
+        errorMessage = "";
         int s = (loadedPlayer.getAP() > 0 ? 0 : statLable.size());
         switch (select)
         {
@@ -556,6 +560,10 @@ bool gameMenu::assignStat() {
                 case 0:
                     return true;
                 default:
+                    if (!loadedPlayer.s_StatAssigned){
+                        errorMessage = "Please Assign All Stat Points For Your Starting Character!";
+                        break;
+                    }               
                     return false;
                 }
             }

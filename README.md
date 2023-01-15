@@ -85,6 +85,8 @@
 
         - Keybind to select path to take will simply be ',' or '<' and '>' or '.'
           or numkey 1/2/3/4 to select the path.
+        - keybind to access UI stuff can be toggled by pressing a key; '/' or 'i'
+          * navigating using ',' , and '.' keys
       5. Battle Screen with enermy encounter with 'X' path.
       6. Shop screen with '$' path
       7. Random encounter screen with '?' path.
