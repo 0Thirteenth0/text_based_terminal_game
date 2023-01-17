@@ -14,12 +14,13 @@ protected:
     bool assignStat();
     void saveGame();
     void loadGame();
+    void setName();
 public:
     gameMenu();
     ~gameMenu();
 };
 
-std::atomic_bool keyPressed[5] = {false}; 
+std::atomic_bool keyPressed[6] = {false}; 
 static int choice = 0;
 color c;
 
@@ -331,6 +332,48 @@ void outputFileWindow(const std::string &filename, std::string err) {
     }
 }
 
+void newPlayerName(std::string name, std::string err){
+    std::string prompt = "  Please Enter a Name For Your Character  ", nameErr = "Error: Name is Too Long!", err_resize = "RESIZE";
+    int r_index = 0, t_index = 0, ticks = 0;
+    winSize window;
+    while (!keyPressed[5])
+    {
+        std::cout << "\033[0;0H";
+        window.update();
+        t_index = 0;
+        for (int i = 0; i < window.height - 1; i++)
+        {
+            for (int j = 0; j < window.width; j++)
+            {
+                if (i == 0 || i == window.height - 2 || j == 0 || j == window.width - 1) {
+                    std::cout << "#";
+                }else if(window.height < 5 || window.width < prompt.size() + 6) {
+                    if (i == window.height / 2 && j > window.width / 2 - err_resize.size() / 2 && j <= window.width / 2 - err_resize.size() / 2 + err_resize.size())
+                        std::cout << err_resize[t_index++];
+                    else
+                        std::cout << " ";
+                }else if(i == window.height / 2 - 2 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                    std::cout << c.getBC(4) << prompt[t_index++] << c.cReset();
+                }else if(i == window.height / 2 - 1 && j > window.width / 2 - prompt.size() / 2 && j < (window.width - 2) / 2 + prompt.size() / 2 + 2){
+                    if(err.size() && j > window.width / 2 - err.size() / 2 && j <= (window.width - 2) / 2 - err.size() / 2 + err.size() + 1)
+                        std::cout << c.getBC(7) << c.getC(196) << err[t_index++] << c.cReset();
+                    else if (j > window.width / 2 - name.size() / 2 && j <= (window.width - 2) / 2 - name.size() / 2 + name.size() + 1)
+                        std::cout << c.getBC(7) << c.getC(4) << name[t_index++] << c.cReset();
+                    else
+                        std::cout << c.getBC(7) << " " << c.cReset();
+                }else{
+                    std::cout << ' ';
+                }
+            }
+            t_index = 0;
+            std::cout << std::endl;
+        }
+        if(!(++ticks % 7))
+            r_index = r_index == 0 ? 15 : 0;
+        usleep(50000);
+    }
+}
+
 char getch() {
     char buf = 0;
     struct termios old = {0};
@@ -395,6 +438,7 @@ int gameMenu::menu() {
             select = choice;
             if (saveCreation()){
                 filename = "savegame/" + filename + ".txt";
+                setName();
                 saveGame();
                 break;
             }
@@ -575,5 +619,32 @@ bool gameMenu::assignStat() {
         }  
     }
     return false;
+}
+
+void gameMenu::setName() {
+    char select = '0';
+    std::string errorMessage = "";
+    loadedPlayer.getName() = "";
+    while (true)
+    {
+        std::thread lockf(newPlayerName, loadedPlayer.getName(), errorMessage);        
+        select = getch();
+        // Set the flag with true to break the loop.
+        keyPressed[5] = true;
+        lockf.join();
+        keyPressed[5] = false;
+        errorMessage = "";
+        if (select == '\n'){
+            if (loadedPlayer.getName().size() > 10 || loadedPlayer.getName().size() < 1)
+            {
+                loadedPlayer.getName() = "";
+                errorMessage = "Error: Invalid Length";
+                continue;
+            }
+            break;
+        }
+        if(!special_characters(select))
+            loadedPlayer.getName() += select;
+    }
 }
 

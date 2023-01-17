@@ -30,7 +30,7 @@ public:
     void add_stat(std::string, double);
     friend std::ostream &operator<<(std::ofstream &, player &);
     friend std::istream &operator>>(std::ifstream &, player& );
-    void name_change(std::string);
+    std::string &getName();
     std::map<std::string,float> &getBaseStats() { return baseStats; }
     int &getAP() {return statPoint;}
     void operator=(const player &);
@@ -154,8 +154,8 @@ std::istream &operator>>(std::ifstream &in, player &p) {
     return in;
 }
 
-void player::name_change(std::string n) {
-    name = n;
+std::string &player::getName() {
+    return name;
 }
 
 player::~player()

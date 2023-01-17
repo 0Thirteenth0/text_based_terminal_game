@@ -13,11 +13,9 @@ public:
 
 game::game(/* args */) {
     update();
-    if (!loadedPlayer.s_StatAssigned){
-        if (assignStat()){
+    if (!loadedPlayer.s_StatAssigned && assignStat()){
             loadedPlayer.s_StatAssigned  = true;     
             saveGame();
-        }
     }
     
 }
