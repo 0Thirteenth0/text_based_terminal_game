@@ -37,6 +37,7 @@
     - Prompts to enter a new save game name to create new save in ./savegame folder.
     - Name must be between 1 and 14 length characters.
     - Name must not be already existing in the ./savegame folder.
+    - Name your character
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/95335912/212164278-edef7502-6bbd-4960-aad5-6275f26721a6.gif)
 
 
