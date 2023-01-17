@@ -87,10 +87,29 @@
           or numkey 1/2/3/4 to select the path.
         - keybind to access UI stuff can be toggled by pressing a key; '/' or 'i'
           * navigating using ',' , and '.' keys
-      5. Battle Screen with enermy encounter with 'X' path.
+      5. Battle Screen with enermy encounter with 'X' path (will need another symbol to
+         represent boss encounter).
       6. Shop screen with '$' path
       7. Random encounter screen with '?' path.
       8. Rest screen with 'R' path.
+        
+    - Concept:
+      1. Level based
+        - passing any station will result in enermy encounter difficulty to increase
+          by a small amount:
+          (possibly: exp += 2^(level station passed/2) + level station passed).
+        - defeating boss encounter will increase difficulty by extra amount 
+        (possibly: exp += 2^(level station passed/2) + level station passed * 2).
+      2. Exp Reward
+        - defeating a enermy encounter will grants 
+          (possibly: exp += 2^(enermyLevel / 2) + level station passed)
+      3. Exp needed will increase by:
+        - previous exp needed = previousEXPneed * 1.5
+      4. May add in grinding levels, help player to pass current level station.
+      5. if player dies in any event, the game will not be over:
+        - penalty:
+          * loss of experience and money?
+      6. 
         
 
 

@@ -1,10 +1,15 @@
 // base class
 class entity
 {
-private:
-
 protected:
+    // coord on the map
     int y = 0, x = 0;
+    std::string name;
+    double exp, expNeeded;
+    unsigned int level;
+    int money;
+    int statPoint;
+    std::map<std::string, float> baseStats, stats;
 
 public:
     entity(/* args */);
@@ -15,14 +20,6 @@ public:
 // Derived class of entity : player
 class player : public entity
 {
-private:
-    std::string name;
-    double exp, expNeeded;
-    unsigned int level;
-    int money;
-    int statPoint;
-    std::map<std::string, float> baseStats, stats;
-
 public:
     bool s_StatAssigned = false;
     player(/* args */);
@@ -63,7 +60,7 @@ public:
 class shop : public entity
 {
 private:
-    /* data */
+    std::map<std::string, int> shopItems;
 public:
     shop(/* args */);
     ~shop();

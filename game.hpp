@@ -17,7 +17,8 @@ game::game(/* args */) {
             loadedPlayer.s_StatAssigned  = true;     
             saveGame();
     }
-    
+
+    printGB();
 }
 
 game::~game(){}

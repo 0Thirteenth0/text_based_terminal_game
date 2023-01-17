@@ -1,3 +1,0 @@
-hello 1 0 50 0 100 1
-b_att 10	b_critC 10	b_critR 10	b_def 10	b_hp 60	b_mAtt 10	b_mDef 10	b_spd 10	
-att 10	critC 10	critR 10	def 10	hp 50	mAtt 10	mDef 10	m_hp 50	spd 10	
