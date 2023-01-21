@@ -96,6 +96,9 @@
         "typeindex": "cpp",
         "unordered_set": "cpp",
         "valarray": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "barrier": "cpp",
+        "format": "cpp",
+        "numbers": "cpp"
     }
 }

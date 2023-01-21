@@ -3,14 +3,13 @@ class entity
 {
 protected:
     // coord on the map
-    int y = 0, x = 0;
+    int beg_y = 0, beg_x = 0, y_Length = 0, x_Length = 0;
     std::string name;
     double exp, expNeeded;
     unsigned int level;
     int money;
     int statPoint;
     std::map<std::string, float> baseStats, stats;
-
 public:
     entity(/* args */);
     ~entity();

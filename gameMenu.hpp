@@ -204,7 +204,6 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
     for (int i = pg.size() + pg2.size(); i < prompt.size(); i++)
         pg += ' ';
     pg += pg2;
-    
     while (!keyPressed[2])
     {
         winSize window;

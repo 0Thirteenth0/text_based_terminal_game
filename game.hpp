@@ -12,13 +12,21 @@ public:
 };
 
 game::game(/* args */) {
-    update();
     if (!loadedPlayer.s_StatAssigned && assignStat()){
             loadedPlayer.s_StatAssigned  = true;     
             saveGame();
     }
+    curr_h = T_WinS.height, curr_w = T_WinS.width;
+    update();
+    while (true)
+    {
+        T_WinS.update();
+        if (T_WinS.height != curr_h || T_WinS.width != curr_w)
+            update();
+        printGB();
+    }
+    
 
-    printGB();
 }
 
 game::~game(){}
@@ -32,6 +40,7 @@ void game::update() {
     T_WinS.update();
     curr_h = T_WinS.height;
     curr_w = T_WinS.width;
+    
     gameBoard.resize(T_WinS.height - 2);
     for(int i = 0; i < gameBoard.size(); i++){
         if(i == 0 || i == gameBoard.size() - 1)
