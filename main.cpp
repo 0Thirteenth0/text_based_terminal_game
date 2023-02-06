@@ -72,10 +72,15 @@ void cursorSet(int y, int x) {
     std::cout << c;
 }
 
+
 // MISC lib
 #include "color.hpp"
 #include "winSize.hpp"
 
+std::atomic_bool keyPressed[7] = {false}; 
+static int choice = 0;
+color c;
+winSize window;
 // ### Entity lib
 #include "./entity/entity.hpp"
 

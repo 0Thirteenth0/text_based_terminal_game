@@ -112,40 +112,35 @@ std::ostream &operator<<(std::ofstream &out, player &p) {
 }
 // read data into game
 std::istream &operator>>(std::ifstream &in, player &p) {
-    std::string line = "";
-    int index = 0;
-    std::string portion;
+    std::string line = "", portion = "", portion1 = "";
     getline(in, line);
-    p.name = line.substr(index, line.find(' ', index) - index);
-    index = line.find(' ', index) + 1;
-    p.level = std::stoi(line.substr(index, line.find(' ', index) - index));
-    index = line.find(' ', index) + 1;
-    p.statPoint = std::stoi(line.substr(index, line.find(' ', index) - index));
-    index = line.find(' ', index) + 1;
-    p.expNeeded = std::stod(line.substr(index, line.find(' ', index) - index));
-    index = line.find(' ', index) + 1;
-    p.exp = std::stod(line.substr(index, line.find(' ', index) - index));
-    index = line.find(' ', index) + 1;
-    p.money = std::stoi(line.substr(index, line.find(' ', index) - index));
-    index = line.find(' ', index) + 1;
-    p.s_StatAssigned = std::stoi(line.substr(index));
-    index = 0;
+    std::stringstream ss(line);
+    ss >> p.name;
+    ss >> portion;
+    p.level = std::stoi(portion);
+    ss >> portion;
+    p.statPoint = std::stoi(portion);
+    ss >> portion;
+    p.expNeeded = std::stoi(portion);
+    ss >> portion;
+    p.exp = std::stoi(portion);
+    ss >> portion;
+    p.money = std::stoi(portion);
+    ss >> portion;
+    p.s_StatAssigned = std::stoi(portion);
     getline(in, line);
-    while (index < line.size())
-    {
-        portion = line.substr(index, line.find(' ', index) - index);
-        index = line.find(' ', index) + 1;
-        p.baseStats[portion] = std::stof(line.substr(index, line.find('\t', index)));
-        index = line.find('\t', index) + 1;
+    ss.clear();
+    ss.str(line);
+    while (ss){
+        ss >> portion >> portion1;
+        p.baseStats[portion] = std::stof(portion1);
     }
-    index = 0;
     getline(in, line);
-    while (index < line.size())
-    {
-        portion = line.substr(index, line.find(' ', index) - index);
-        index = line.find(' ', index) + 1;
-        p.stats[portion] = std::stof(line.substr(index, line.find('\t', index)));
-        index = line.find('\t', index) + 1;
+    ss.clear();
+    ss.str(line);
+    while (ss){
+        ss >> portion >> portion1;
+        p.stats[portion] = std::stof(portion1);
     }
     return in;
 }

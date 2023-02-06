@@ -2,28 +2,42 @@ class game : public gameMenu
 {
 private:
     std::vector<std::string> gameBoard;
-    winSize T_WinS;
     int curr_h, curr_w;
 public:
     game(/* args */);
     void update();
-    void printGB();
     ~game();
 };
+
+void printGB(const std::vector<std::string> &gameBoard) {
+    while (!keyPressed[6])
+    {
+        
+        std::cout << "\033[0;0H";
+        for(auto i : gameBoard)
+            std::cout << i << "\n";
+    }
+}
 
 game::game(/* args */) {
     if (!loadedPlayer.s_StatAssigned && assignStat()){
             loadedPlayer.s_StatAssigned  = true;     
             saveGame();
     }
-    curr_h = T_WinS.height, curr_w = T_WinS.width;
+    curr_h = window.height, curr_w = window.width;
     update();
+    int select = 0;
     while (true)
     {
-        T_WinS.update();
-        if (T_WinS.height != curr_h || T_WinS.width != curr_w)
+        window.update();
+        if (window.height != curr_h || window.width != curr_w)
             update();
-        printGB();
+        std::thread lockf(printGB, gameBoard);        
+        select = getch();
+        // Set the flag with true to break the loop.
+        keyPressed[6] = true;
+        lockf.join();
+        keyPressed[6] = false;
     }
     
 
@@ -31,22 +45,18 @@ game::game(/* args */) {
 
 game::~game(){}
 
-void game::printGB() {
-    for(auto i : gameBoard)
-        std::cout << i << "\n";
-}
 
 void game::update() {
-    T_WinS.update();
-    curr_h = T_WinS.height;
-    curr_w = T_WinS.width;
+    window.update();
+    curr_h = window.height;
+    curr_w = window.width;
     
-    gameBoard.resize(T_WinS.height - 2);
-    for(int i = 0; i < gameBoard.size(); i++){
+    gameBoard.resize(window.height - 1);
+    for(int i = 0; i < gameBoard.size() - 1; i++){
         if(i == 0 || i == gameBoard.size() - 1)
-            gameBoard[i] = std::string(T_WinS.width, '#');
+            gameBoard[i] = std::string(window.width, '#');
         else
-            gameBoard[i] = "#" + std::string(T_WinS.width - 2,' ') + "#";
+            gameBoard[i] = "#" + std::string(window.width - 2,' ') + "#";
     }
     
 }

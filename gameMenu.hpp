@@ -20,9 +20,7 @@ public:
     ~gameMenu();
 };
 
-std::atomic_bool keyPressed[6] = {false}; 
-static int choice = 0;
-color c;
+
 
 bool special_characters(char c) {
     std::string s = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890_";
@@ -35,7 +33,6 @@ void addStatWindow(player lp, std::vector<std::string> name, int select, int AP,
     int r_index = 0, t_index = 0, count = 0, ticks = 0;
     std::string header = "Assign Stat Points", err_resize = "RESIZE", symbol = "[+]", aPoints = "Available:", aply = "Apply", rst = "Reset";
     aPoints += std::string(40 - std::to_string(AP).size() - aPoints.size(), ' ') + std::to_string(AP);
-    winSize window;
     std::vector<std::string> items;
     for (const auto &i : name){
         items.push_back((count == select ? "[" + i : i) + std::string((count == select ? 37 : 38) - (i.size() + 1) - (std::to_string(lp.getBaseStats()[i]).substr(0,std::to_string(lp.getBaseStats()[i]).find('.') + 3).size() + 1),' ') + std::to_string(lp.getBaseStats()[i]).substr(0, std::to_string(lp.getBaseStats()[i]).find('.') + 3) + " ");
@@ -132,7 +129,6 @@ void menuScreen(int selection)
     title.push_back("/\\__|    (  <_> )  |  /|  | \\/   |  \\  ___/\\___  |");
     title.push_back("\\________|\\____/|____/ |__|  |___|  /\\___  > ____|");
     title.push_back("                                  \\/     \\/\\/     ");
-    winSize window;
     while (!keyPressed[0])
     {
         std::cout << "\033[0;0H";
@@ -206,7 +202,7 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
     pg += pg2;
     while (!keyPressed[2])
     {
-        winSize window;
+
         std::cout << "\033[0;0H";
         window.update();
         t_index = 0, r_index = (select/20)*20;
@@ -256,7 +252,6 @@ void loadWindows(const std::vector<std::string> &saves, int select) {
 void settingWindow() {
     std::string inprogress = "       In Progress!       ";
     int left = 0, right = 0, t_index = 0, ticks = 0;
-    winSize window;
     while (!keyPressed[1])
     {
         std::cout << "\033[0;0H";
@@ -289,7 +284,6 @@ void settingWindow() {
 void outputFileWindow(const std::string &filename, std::string err) {
     std::string prompt = "Please Enter a Filename!", nameErr = "Error: Name is Too Long!", err_resize = "RESIZE";
     int r_index = 0, t_index = 0, ticks = 0;
-    winSize window;
     while (!keyPressed[3])
     {
         std::cout << "\033[0;0H";
@@ -334,7 +328,6 @@ void outputFileWindow(const std::string &filename, std::string err) {
 void newPlayerName(std::string name, std::string err){
     std::string prompt = "  Please Enter a Name For Your Character  ", nameErr = "Error: Name is Too Long!", err_resize = "RESIZE";
     int r_index = 0, t_index = 0, ticks = 0;
-    winSize window;
     while (!keyPressed[5])
     {
         std::cout << "\033[0;0H";
