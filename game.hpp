@@ -5,9 +5,11 @@ private:
     int curr_h, curr_w;
 public:
     game(/* args */);
-    void update();
+    void updateG();
     ~game();
 };
+
+
 
 void printGB(const std::vector<std::string> &gameBoard) {
     while (!keyPressed[6])
@@ -16,6 +18,7 @@ void printGB(const std::vector<std::string> &gameBoard) {
         for(auto i : gameBoard)
             std::cout << i << "\n";
     }
+        
 }
 
 void toggleGameBoard(int curr_h, int curr_w) {
@@ -23,41 +26,9 @@ void toggleGameBoard(int curr_h, int curr_w) {
         window.update();
     keyPressed[6] = true;
 }
-void getInput() {
-    
-}
 
 
-game::game(/* args */) {
-    if (!loadedPlayer.s_StatAssigned && assignStat()){
-            loadedPlayer.s_StatAssigned  = true;     
-            saveGame();
-    }
-    curr_h = window.height, curr_w = window.width;
-    update();
-    int select = 0;
-    while (true)
-    {
-        window.update();
-        if (window.height != curr_h || window.width != curr_w)
-            update();
-        std::thread lockf(printGB, gameBoard); 
-        std::thread checkResize(toggleGameBoard, curr_h, curr_w);
-        // find a way to make the window reflect immediately to the change when the window is resized
-        select = getch();
-        // Set the flag with true to break the loop.
-        keyPressed[6] = true;
-        lockf.join();
-
-        keyPressed[6] = false;
-    }
-    
-
-}
-
-game::~game(){}
-
-void game::update() {
+void game::updateG() {
     window.update();
     curr_h = window.height;
     curr_w = window.width;
@@ -70,4 +41,36 @@ void game::update() {
             gameBoard[i] = "#" + std::string(curr_w - 2,' ') + "#";
     }
     
+    
 }
+
+game::game(/* args */) {
+    if (!loadedPlayer.s_StatAssigned && assignStat()){
+            loadedPlayer.s_StatAssigned  = true;     
+            saveGame();
+    }
+    curr_h = window.height, curr_w = window.width;
+    updateG();
+    int select = 0;
+    while (true)
+    {
+        std::cout << "\033[0;0H";
+        window.update();
+        if (window.height != curr_h || window.width != curr_w)
+            updateG();
+        for (const auto &i : gameBoard)
+            std::cout << i << std::endl;
+        
+        // find a way to make the window reflect immediately to the change when the window is resized
+        // Set the flag with true to break the loop.
+        if (kbhit())
+            select = getchar();
+        
+        if(select == 'h')
+            break;
+    }
+    
+
+}
+
+game::~game(){}

@@ -65,7 +65,9 @@ namespace fs = std::filesystem;
 #include <atomic>
 #include <thread>
 #include <mutex>
+#include <fcntl.h>
 #include <condition_variable>
+#include "utility.hpp"
 
 void cursorSet(int y, int x) {
     std::string c = "\033[" + std::to_string(y) + ";" + std::to_string(x) + "H";
@@ -78,7 +80,7 @@ void cursorSet(int y, int x) {
 #include "winSize.hpp"
 
 std::atomic_bool keyPressed[7] = {false}; 
-std::atomic_char key = '\0';
+std::atomic_char keyP = '\0';
 static int choice = 0;
 color c;
 winSize window;
@@ -89,34 +91,6 @@ winSize window;
 #include "gameMenu.hpp"
 #include "game.hpp"
 
-
-
-class BufferToggle
-{
-    private:
-        struct termios t;
-
-    public:
-        /*
-         * Disables buffered input
-         */
-
-        void off(void)
-        {
-            tcgetattr(STDIN_FILENO, &t); //get the current terminal I/O structure
-            t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
-            tcsetattr(STDIN_FILENO, TCSANOW, &t); //Apply the new settings
-        }
-        /*
-         * Enables buffered input
-         */
-        void on(void)
-        {
-            tcgetattr(STDIN_FILENO, &t); //get the current terminal I/O structure
-            t.c_lflag |= ICANON; //Manipulate the flag bits to do what you want it to do
-            tcsetattr(STDIN_FILENO, TCSANOW, &t); //Apply the new settings
-        }
-};
 
 
 int main(int argv, char** argc) {
