@@ -78,6 +78,7 @@ void cursorSet(int y, int x) {
 #include "winSize.hpp"
 
 std::atomic_bool keyPressed[7] = {false}; 
+std::atomic_char key = '\0';
 static int choice = 0;
 color c;
 winSize window;

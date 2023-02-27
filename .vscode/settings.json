@@ -99,6 +99,7 @@
         "*.ipp": "cpp",
         "barrier": "cpp",
         "format": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "__availability": "cpp"
     }
 }
