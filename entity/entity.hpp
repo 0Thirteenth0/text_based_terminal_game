@@ -5,7 +5,7 @@ protected:
     // coord on the map
     int beg_y = 0, beg_x = 0, y_Length = 0, x_Length = 0;
     std::string name;
-    double exp, expNeeded;
+    int exp, expNeeded;
     unsigned int level;
     int money;
     int statPoint;
@@ -20,6 +20,7 @@ public:
 class player : public entity
 {
 public:
+    std::vector<std::string> character;
     bool s_StatAssigned = false;
     player(/* args */);
     ~player();
@@ -29,6 +30,8 @@ public:
     std::string &getName();
     std::map<std::string,float> &getBaseStats() { return baseStats; }
     int &getAP() {return statPoint;}
+    int &getExp() {return exp;}
+    int getExpNeed() {return expNeeded;}
     void operator=(const player &);
 };
 
@@ -78,6 +81,15 @@ entity::~entity()
 // player function definitions:
 player::player(/* args */)
 {
+    character.push_back("     .-\"-.      ");
+    character.push_back("    /_ _  \\     ");
+    character.push_back("    \\@ @  /     ");
+    character.push_back("    (_> _)      ");
+    character.push_back("      `)(_      ");
+    character.push_back("      /((_`)_,  ");
+    character.push_back("      \\__(/-\"   ");
+    character.push_back("     __|||__    ");
+    character.push_back("    ((__|__))   ");
     name = "player";
     money = 100;
     level = 1, exp = 0, expNeeded = 50;
@@ -116,18 +128,12 @@ std::istream &operator>>(std::ifstream &in, player &p) {
     getline(in, line);
     std::stringstream ss(line);
     ss >> p.name;
-    ss >> portion;
-    p.level = std::stoi(portion);
-    ss >> portion;
-    p.statPoint = std::stoi(portion);
-    ss >> portion;
-    p.expNeeded = std::stoi(portion);
-    ss >> portion;
-    p.exp = std::stoi(portion);
-    ss >> portion;
-    p.money = std::stoi(portion);
-    ss >> portion;
-    p.s_StatAssigned = std::stoi(portion);
+    ss >> p.level;
+    ss >> p.statPoint;
+    ss >> p.expNeeded;
+    ss >> p.exp;
+    ss >> p.money;
+    ss >> p.s_StatAssigned;
     getline(in, line);
     ss.clear();
     ss.str(line);
