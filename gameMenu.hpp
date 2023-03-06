@@ -586,6 +586,7 @@ bool gameMenu::assignStat() {
             if (choice < statLable.size())
             {
                 loadedPlayer.getBaseStats()[statLable[choice]]++;
+                loadedPlayer.getStats()[statLable[choice].substr(statLable[choice].find('_') + 1)]++;
                 if (!(--loadedPlayer.getAP()))
                     choice = statLable.size();
             }else if (choice == statLable.size() + 1){

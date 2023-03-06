@@ -1,3 +1,3 @@
 testP 1 0 50 5000 100 1
-b_att 12	b_critC 11	b_critR 11	b_def 11	b_hp 51	b_mAtt 12	b_mDef 11	b_spd 11	
-att 10	critC 10	critR 10	def 10	hp 50	mAtt 10	mDef 10	m_hp 50	spd 10	
+b_att 1212	b_critC 113	b_critR 112	b_def 1133	b_hp 521	b_mAtt 1122	b_mDef 1121	b_spd 1121	
+att 1023	critC 1210	critR 10	def 102	hp 5033	mAtt 102	mDef 1012	m_hp 5120	spd 1012	

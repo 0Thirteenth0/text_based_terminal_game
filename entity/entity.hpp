@@ -29,6 +29,7 @@ public:
     friend std::istream &operator>>(std::ifstream &, player& );
     std::string &getName();
     std::map<std::string,float> &getBaseStats() { return baseStats; }
+    std::map<std::string,float> &getStats() { return stats; }
     int &getAP() {return statPoint;}
     int &getExp() {return exp;}
     int getExpNeed() {return expNeeded;}

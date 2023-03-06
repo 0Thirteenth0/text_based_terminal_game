@@ -1,0 +1,3 @@
+sadzx 1 0 50 0 100 1
+b_att 11	b_critC 13	b_critR 12	b_def 13	b_hp 51	b_mAtt 10	b_mDef 10	b_spd 10	
+att 11	critC 13	critR 12	def 13	hp 51	mAtt 10	mDef 10	m_hp 50	spd 10	

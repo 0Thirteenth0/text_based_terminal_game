@@ -37,6 +37,8 @@
 #endif
 
 namespace fs = std::filesystem;
+const std::string st = "STAT", equip = "EQUIPMENTS", inven = "INVENTORY", ptAssign = "Stat Points:";
+
 #define B_HP    "b_hp"
 #define M_HP    "m_hp"
 #define HP      "hp"

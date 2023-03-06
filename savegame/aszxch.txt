@@ -1,0 +1,3 @@
+cxzc 1 0 50 0 100 1
+b_att 11	b_critC 11	b_critR 11	b_def 11	b_hp 51	b_mAtt 11	b_mDef 13	b_spd 11	
+att 11	critC 11	critR 11	def 11	hp 51	mAtt 11	mDef 13	m_hp 50	spd 11	
