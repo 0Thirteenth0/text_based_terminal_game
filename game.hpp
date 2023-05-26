@@ -4,19 +4,21 @@ private:
     std::vector<std::string> gameBoard, equipCategory, statName;
     std::map<std::string, float> curr_stat;
     int curr_h, curr_w, game_s;
+
+    //displayer
     void characterDisplay();
     void displayStats();
     void displayEXP();
     void displayUI(int s);
     void inventoryMenu();
     void settingsMenu();
+
+    //updater
     void updateGameMap(int);
     void updateInventoryM(int);
+    void updateSettingM(int);
 public:
     game(/* args */);
-    
-
-    
     ~game();
 };
 
@@ -106,14 +108,47 @@ void game::updateInventoryM(int select) {
             gameBoard[window.height/2 - 5][i] = inven[iter++];
         for (int i = padding; i < window.width-padding-3; i++)
             gameBoard[window.height / 2 - 4][i] = '#';
-        
-        
     }
-
-    
-    
-    
 }
+void game:: updateSettingM(int select) {
+    int padding = (window.width - 4) / 4, iter = 0, category = 0;
+    std::string Header = "Setting";
+    if (window.height < 49 || window.width < 125)
+    {
+        std::string message = "Please Resize";
+        for (int i = 0; i < window.height-1; i++)
+        {
+            if (i == 0 || i == window.height - 2)
+                gameBoard[i] = std::string(window.width, '#');
+            else
+                gameBoard[i] = "#" + std::string(window.width - 2, ' ') + "#";
+        }
+        for (int i = window.width/2 - message.size()/2; i < window.width/2 - message.size()/2 + message.size(); i++)
+            gameBoard[window.height/2][i] = message[iter++];
+    }else{
+        // top border
+        for (int i = padding; i < window.width-padding-3; i++)
+            gameBoard[window.height / 2 - 20][i] = '#';
+        //side border
+        for (int i = window.height / 2 - 19; i < window.height / 2 + 20; i++) {
+            for (int j = padding; j < window.width - padding - 3; j++) {
+                 if (j == padding || j == window.width - padding - 4)
+                    gameBoard[i][j] = '#';
+                else
+                    gameBoard[i][j] = ' ';
+            }
+        }
+        // bottom border
+        for (int j = padding; j < window.width - padding - 3; j++)
+            gameBoard[window.height / 2 + 20][j] = '#';
+        iter = 0;
+        // header 
+        for (int i = padding*2 - Header.size()/2; i < padding*2 - Header.size()/2 + Header.size(); i++){
+            gameBoard[window.height / 2 - 19][i] = Header[iter++];
+        }
+    }
+}
+
 
 void game::inventoryMenu() {
     updateGameMap(0);
@@ -134,16 +169,27 @@ void game::inventoryMenu() {
         if(keyP == 27)
             break;
     }
-    
-
-
-    
-    
-    
 }
 
 void game::settingsMenu() {
-
+    updateGameMap(0);
+    int select = 0;
+    while (true)
+    {
+        std::cout << "\033[0;0H";
+        window.update();
+        if (window.height != curr_h || window.width != curr_w)
+            updateGameMap(0);
+        char keyP = '\0';
+        updateSettingM(select);
+        for (const auto &i : gameBoard)
+            std::cout << i << std::endl;
+        keyP = '\0';
+        if(kbhit())
+            keyP = getchar();
+        if(keyP == 27)
+            break;
+    }
 }
 
 void game::displayEXP(){
@@ -178,7 +224,6 @@ void game::displayEXP(){
     if (expPercentage >= window.width - 2)
         gameBoard[1] += c.cReset();
     gameBoard[2] = std::string(window.width, '#');
-    
 }
 void game::displayUI(int s){
     std::string inv = s == 1 ? " "+ c.getBC(18) + "[ Inventory ]" + c.cReset()+ " " : "  [Inventory]  ";
@@ -282,7 +327,6 @@ game::game(/* args */) {
                 game_s = 3;
             displayUI(game_s);
         }
-
         if (keyP == '\n') {
             switch (game_s) {
                 case 1:
@@ -290,14 +334,13 @@ game::game(/* args */) {
                     updateGameMap(game_s);
                     break;
                 case  2:
-                    
+                    settingsMenu();
                     updateGameMap(game_s);
                     break;
                 default:
                     break;
             }
         }
-        
         if(keyP == 'p')
             break;
     }
